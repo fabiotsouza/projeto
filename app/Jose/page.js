@@ -90,9 +90,9 @@ function Pagina_jose() {
 
           <tbody>
             <tr>
-              <th> Corte 1 </th>
-              <th> Corte 2 </th>
-              <th> Consulta </th>
+              <th> NOME </th>
+              <th> FOTO </th>
+              <th> PREÇO </th>
             </tr>
 
 
