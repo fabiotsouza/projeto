@@ -173,8 +173,12 @@ function Pagina_jose() {
                 </td>
               </tr>
             ))}
+            
           </tbody>
+          
         </table>
+
+        
 
         
 
