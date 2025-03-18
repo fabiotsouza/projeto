@@ -5,8 +5,17 @@ import "./projeto1.css";
 
 function Pagina_jose() {
   
-  const [novaImagem1, setNovaImagem1] = useState(null);
-  const [novaImagem2, setNovaImagem2] = useState(null);
+  const [imagens, setImagens] = useState([
+
+    {corte1: null, corte2: null, consulta: null},
+    {corte1: null, corte2: null, consulta: null},
+    {corte1: null, corte2: null, consulta: null},
+    {corte1: null, corte2: null, consulta: null}
+
+  ]);
+
+  const [selecao, setSelecao] = useState ({linha: 0, tipo: 'corte1'});
+  
 
   
   const handleImageChange = (e) => {
@@ -14,6 +23,8 @@ function Pagina_jose() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        const newImagens = [...imagens];
+        newImagens [selecao.linha] [selecao.tipo] = reader.result;
         setNovaImagem(reader.result); 
       };
       reader.readAsDataURL(file); 
@@ -96,10 +107,10 @@ function Pagina_jose() {
 
            <tr>
               <td className="corte">
-                <img src={novaImagem || "https://via.placeholder.com/80"} alt="Corte 1" />
+                <img src={imagens.corte1 || "https://via.placeholder.com/80"} alt="Corte 1" />
               </td>
               <td className="corte">
-                <img src={novaImagem2 || "https://via.placeholder.com/80"} alt="Corte 2" />
+                <img src= "https://via.placeholder.com/80" alt="Corte 2" />
               </td>
               <td className="corte">
                 <img src="https://via.placeholder.com/80" alt="Consulta" />
