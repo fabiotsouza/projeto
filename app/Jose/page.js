@@ -1,13 +1,11 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./projeto1.css";
 
 function Pagina_jose() {
 
-  
   const [imagens, setImagens] = useState([
-    { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
@@ -17,9 +15,22 @@ function Pagina_jose() {
 
   const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
 
+  
+  useEffect(() => {
+    const dadosSalvos = localStorage.getItem('imagens');
+    if (dadosSalvos) {
+      setImagens(JSON.parse(dadosSalvos));
+    }
+  }, []);
 
+  
+  const handleTextChange = (e) => {
+    const newImagens = [...imagens];
+    newImagens[selecao.linha][selecao.tipo] = e.target.value;
+    setImagens(newImagens);
+  };
 
-
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -33,22 +44,23 @@ function Pagina_jose() {
     }
   };
 
-
-
-
   
-  const handleTextChange = (e) => {
-    const newImagens = [...imagens];
-    newImagens[selecao.linha][selecao.tipo] = e.target.value;
-    setImagens(newImagens);
+  const salvarDados = () => {
+    localStorage.setItem('imagens', JSON.stringify(imagens));
+    alert('Alterações salvas com sucesso!');
   };
 
-
-
-
-
-
   return (
+
+
+
+
+
+
+
+
+
+
     <div>
       <div className="logo">
         <button><i className="fa-solid fa-list"></i> Menu</button>
@@ -66,13 +78,16 @@ function Pagina_jose() {
 
 
 
-
-
-
-
       <div className="container">
+
+
+
+
+
+
         <div className="ADcortes">
           <h2>Alterar Cortes</h2>
+
           
           
           <div className="item">
@@ -83,27 +98,18 @@ function Pagina_jose() {
               style={{ display: 'none' }}
               onChange={handleImageChange}
             />
-            
           </div>
-
-          
-
-          
-
-
         </div>
-
-          
-
-
-
-
-
 
 
 
         <table style={{ width: '100%' }}>
+
+
+
           <tbody>
+
+
 
 
 
@@ -124,13 +130,10 @@ function Pagina_jose() {
 
 
 
-            
+
+           
             {imagens.map((imagem, index) => (
-
               <tr key={index}>
-
-
-
                 
                 <td className="corte">
                   {selecao.linha === index && selecao.tipo === 'nome' ? (
@@ -173,18 +176,9 @@ function Pagina_jose() {
                 </td>
               </tr>
             ))}
-            
           </tbody>
-          
         </table>
-
-        
-
-        
-
-
       </div>
-
 
 
 
@@ -194,15 +188,16 @@ function Pagina_jose() {
 
 
       <div className="final">
-        <button>Finalizar</button>
+        
+        <button onClick={salvarDados}>Finalizar</button>
       </div>
 
 
 
 
 
+        <script src="font-awesome-v6.6.js"></script>
 
-      <script src="font-awesome-v6.6.js"></script>
     </div>
   );
 }
