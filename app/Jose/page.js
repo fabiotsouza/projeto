@@ -83,8 +83,17 @@ function Pagina_jose() {
               style={{ display: 'none' }}
               onChange={handleImageChange}
             />
+            
           </div>
+
+          
+
+          
+
+
         </div>
+
+          
 
 
 
@@ -166,6 +175,10 @@ function Pagina_jose() {
             ))}
           </tbody>
         </table>
+
+        
+
+
       </div>
 
 
