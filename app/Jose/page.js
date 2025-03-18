@@ -6,11 +6,13 @@ import "./projeto1.css";
 function Pagina_jose() {
 
   const [imagens, setImagens] = useState([
+    
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null }
+    
   ]);
 
   const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
