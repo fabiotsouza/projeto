@@ -7,14 +7,14 @@ function Pagina_jose() {
 
   
   const [imagens, setImagens] = useState([
-    { corte1: null, corte2: null, consulta: null },
-    { corte1: null, corte2: null, consulta: null },
-    { corte1: null, corte2: null, consulta: null },
-    { corte1: null, corte2: null, consulta: null },
-    { corte1: null, corte2: null, consulta: null }
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null }
   ]);
 
-  const [selecao, setSelecao] = useState({ linha: 0, tipo: 'corte1' });
+  const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -107,22 +107,22 @@ function Pagina_jose() {
                 <td className="corte">
                   <img
                     src={imagem.corte1 || "https://via.placeholder.com/80"}
-                    alt={`Corte 1 da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha: index , tipo: 'corte1' })}
+                    alt={`nome da linha ${index + 1}`}
+                    onClick={() => setSelecao({ linha: index , tipo: 'nome' })}
                   />
                 </td>
                 <td className="corte">
                   <img
-                    src={imagem.corte2 || "https://via.placeholder.com/80"}
-                    alt={`Corte 2 da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha:  index, tipo: 'corte2' })}
+                    src={imagem.corte || "https://via.placeholder.com/80"}
+                    alt={`Corte da linha ${index + 1}`}
+                    onClick={() => setSelecao({ linha:  index, tipo: 'corte' })}
                   />
                 </td>
                 <td className="corte">
                   <img
                     src={imagem.consulta || "https://via.placeholder.com/80"}
-                    alt={`Consulta da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha:  index, tipo: 'consulta' })}
+                    alt={`preço da linha ${index + 1}`}
+                    onClick={() => setSelecao({ linha:  index, tipo: 'preço' })}
                   />
                 </td>
               </tr>
