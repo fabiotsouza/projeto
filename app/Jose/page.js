@@ -74,7 +74,13 @@ function Pagina_jose() {
             />
           </div>
           <div className="item">
-            <button>Consultar</button>
+            <button onClick={() => document.getElementById('imageUpload').click()}>Consultar</button>
+            <input
+              type="file"
+              id="imageUpload"
+              style={{ display: 'none' }} 
+              onChange={handleImageChange} 
+            />
           </div>
         </div>
 
@@ -110,7 +116,7 @@ function Pagina_jose() {
                 <img src={imagens.corte1 || "https://via.placeholder.com/80"} alt="Corte 1" />
               </td>
               <td className="corte">
-                <img src= "https://via.placeholder.com/80" alt="Corte 2" />
+                <img src={imagens.corte2 ||  "https://via.placeholder.com/80"} alt="Corte 2" />
               </td>
               <td className="corte">
                 <img src="https://via.placeholder.com/80" alt="Consulta" />
