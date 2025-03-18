@@ -11,34 +11,44 @@ function Pagina_jose() {
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null }
   ]);
 
   const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
+
+
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        
         const newImagens = [...imagens];
         newImagens[selecao.linha][selecao.tipo] = reader.result;
         setImagens(newImagens);
-
-
       };
       reader.readAsDataURL(file);
     }
   };
 
+
+
+
+  
+  const handleTextChange = (e) => {
+    const newImagens = [...imagens];
+    newImagens[selecao.linha][selecao.tipo] = e.target.value;
+    setImagens(newImagens);
+  };
+
+
+
+
+
+
   return (
-
-
-
-
-
-
     <div>
       <div className="logo">
         <button><i className="fa-solid fa-list"></i> Menu</button>
@@ -58,9 +68,13 @@ function Pagina_jose() {
 
 
 
+
+
       <div className="container">
         <div className="ADcortes">
           <h2>Alterar Cortes</h2>
+          
+          
           <div className="item">
             <button onClick={() => document.getElementById('imageUpload').click()}>Adicionar Novo Corte</button>
             <input
@@ -70,25 +84,22 @@ function Pagina_jose() {
               onChange={handleImageChange}
             />
           </div>
-          <div className="item">
-            <button onClick={() => document.getElementById('imageUpload').click()}>Consultar</button>
-            <input
-              type="file"
-              id="imageUpload"
-              style={{ display: 'none' }}
-              onChange={handleImageChange}
-            />
-          </div>
         </div>
 
+
+
+
+
+
+
+
         <table style={{ width: '100%' }}>
-
-
-
-
-
-
           <tbody>
+
+
+
+
+
             <tr>
               <th> NOME </th>
               <th> FOTO </th>
@@ -101,29 +112,55 @@ function Pagina_jose() {
 
 
 
-           
+
+
+
+            
             {imagens.map((imagem, index) => (
+
               <tr key={index}>
+
+
+
+                
                 <td className="corte">
-                  <img
-                    src={imagem.corte1 || "https://via.placeholder.com/80"}
-                    alt={`nome da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha: index , tipo: 'nome' })}
-                  />
+                  {selecao.linha === index && selecao.tipo === 'nome' ? (
+                    <input
+                      type="text"
+                      value={imagem.nome || ""}
+                      onChange={handleTextChange}
+                      placeholder="Digite o nome"
+                    />
+                  ) : (
+                    <span onClick={() => setSelecao({ linha: index, tipo: 'nome' })}>
+                      {imagem.nome || "Nome"}
+                    </span>
+                  )}
                 </td>
+
+                
                 <td className="corte">
                   <img
                     src={imagem.corte || "https://via.placeholder.com/80"}
                     alt={`Corte da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha:  index, tipo: 'corte' })}
+                    onClick={() => setSelecao({ linha: index, tipo: 'corte' })}
                   />
                 </td>
+
+                
                 <td className="corte">
-                  <img
-                    src={imagem.consulta || "https://via.placeholder.com/80"}
-                    alt={`preço da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha:  index, tipo: 'preço' })}
-                  />
+                  {selecao.linha === index && selecao.tipo === 'preco' ? (
+                    <input
+                      type="text"
+                      value={imagem.preco || ""}
+                      onChange={handleTextChange}
+                      placeholder="Digite o preço"
+                    />
+                  ) : (
+                    <span onClick={() => setSelecao({ linha: index, tipo: 'preco' })}>
+                      {imagem.preco || "Preço"}
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}
@@ -139,12 +176,9 @@ function Pagina_jose() {
 
 
 
-
       <div className="final">
         <button>Finalizar</button>
       </div>
-
-
 
 
 
