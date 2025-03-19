@@ -13,7 +13,19 @@ function Pagina_jose() {
     { nome: null, corte: null, preco: null }
   ]);
 
+
+
+
+
   const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
+  const [urlVisivel, setUrlVisivel] = useState(false);  
+  const [urlImagem, setUrlImagem] = useState('');  
+
+
+
+
+
+
 
   useEffect(() => {
     const dadosSalvos = localStorage.getItem('imagens');
@@ -22,24 +34,47 @@ function Pagina_jose() {
     }
   }, []);
 
+
+
+
+
   const handleTextChange = (e) => {
     const newImagens = [...imagens];
     newImagens[selecao.linha][selecao.tipo] = e.target.value;
     setImagens(newImagens);
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const newImagens = [...imagens];
-        newImagens[selecao.linha][selecao.tipo] = reader.result;
-        setImagens(newImagens);
-      };
-      reader.readAsDataURL(file);
+
+
+
+
+  const handleImageUrlChange = (e) => {
+    setUrlImagem(e.target.value); 
+  };
+
+
+
+
+
+
+  const salvarImagemUrl = () => {
+    if (urlImagem) {
+      const newImagens = [...imagens];
+      newImagens[selecao.linha].corte = urlImagem;  
+      setImagens(newImagens);
+      setUrlVisivel(false);  
+      setUrlImagem('');  
+    } else {
+      alert("Por favor, insira uma URL válida.");
     }
   };
+
+
+
+
+
+
+
 
   const salvarDados = () => {
     localStorage.setItem('imagens', JSON.stringify(imagens));
@@ -53,21 +88,11 @@ function Pagina_jose() {
   const apagarLinha = () => {
     const newImagens = imagens.filter((_, index) => index !== selecao.linha);
     setImagens(newImagens);
-    setSelecao({ linha: 0, tipo: 'nome' }); 
+    setSelecao({ linha: 0, tipo: 'nome' });
   };
 
-
-
   return (
-
-
-
-
-
-
-
     <div>
-
 
 
 
@@ -92,32 +117,57 @@ function Pagina_jose() {
 
 
 
-
-
-
-
-
-
-
       <div className="container">
         <div className="ADcortes">
           <br/>
           <h2>Alterar Cortes</h2>
 
 
+
+
+
+
+          
           <div className="final">
-
-
-
-            <button onClick={salvarDados}>Finalizar</button><br/><br/><br/>
-            <button onClick={adicionarLinha}>Adicionar Linha</button><br/><br/><br/>
-            
-
-
-
+            <button onClick={() => setUrlVisivel(!urlVisivel)}>
+              {urlVisivel ? 'Cancelar' : 'Adicionar Novo Corte via URL'}
+            </button>
           </div>
 
           
+
+
+
+
+
+
+          {urlVisivel && (
+            <div >
+              <input
+                type="text"
+                value={urlImagem}
+                onChange={handleImageUrlChange}
+                placeholder="Insira a URL da imagem"
+                style={{ marginTop: '10px', padding: '5px', width: '100%' }}
+              />
+              <button  onClick={salvarImagemUrl} style={{ marginTop: '10px' }}>
+                Salvar Imagem
+              </button>
+            </div>
+          )}
+
+
+
+
+
+
+
+
+
+          <div className="final">
+            <button onClick={salvarDados}>Finalizar</button><br /><br /><br />
+            <button onClick={adicionarLinha}>Adicionar Linha</button><br /><br /><br />
+          </div>
         </div>
 
 
@@ -125,10 +175,10 @@ function Pagina_jose() {
 
 
 
-
-
-
         <table style={{ width: '100%' }}>
+
+
+
           <tbody>
 
 
@@ -154,17 +204,16 @@ function Pagina_jose() {
 
 
 
-
-
-
-
-
-
-
-
-
             {imagens.map((imagem, index) => (
               <tr key={index}>
+
+
+
+
+
+
+
+
                 <td className="corte">
                   {selecao.linha === index && selecao.tipo === 'nome' ? (
                     <input
@@ -180,26 +229,34 @@ function Pagina_jose() {
                   )}
                 </td>
 
-                <td className="corte">
-                  <img
 
+
+
+
+
+
+
+
+
+
+
+                <td className="corte">
+                  
+                  <img
                     src={imagem.corte || "https://via.placeholder.com/80"}
                     alt={`Corte da linha ${index + 1}`}
                     onClick={() => setSelecao({ linha: index, tipo: 'corte' })}
-                    
+                    style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                   />
-
-                    <div className="item">
-                      <button onClick={() => document.getElementById('imageUpload').click()}>Adicionar Novo Corte</button>
-                      <input
-                        type="file"
-                        id="imageUpload"
-                        style={{ display: 'none' }}
-                        onChange={handleImageChange}
-                      />
-                    </div>
-
                 </td>
+
+
+
+
+
+
+
+
 
                 <td className="corte">
                   {selecao.linha === index && selecao.tipo === 'preco' ? (
@@ -214,19 +271,25 @@ function Pagina_jose() {
                       {imagem.preco || "Preço"}
                     </span>
                   )}
-
-                   
                 </td>
+
+
+
+
+
+
+
+
+
+
+
+
 
                 <td className="corte">
-                 
-                 <button onClick={apagarLinha}>Apagar Linha</button>
-
+                  
+                  <button onClick={apagarLinha}>Apagar Linha</button>
                 </td>
-
-               
               </tr>
-              
             ))}
           </tbody>
         </table>
@@ -234,13 +297,7 @@ function Pagina_jose() {
 
 
 
-        
 
-
-
-
-
-      
 
 
 
