@@ -1,0 +1,55 @@
+body{
+    background-color: #494850;
+}
+.title{
+    margin: 20px 50px;
+}
+.title h1{
+    font-size: 35px;
+    color: aliceblue;
+}
+.title h2{
+    font-size: 25px;
+    color: silver;
+}
+.screen{
+    display: flex;
+    flex-direction:row;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 0px;
+}
+
+.calendar{
+    background-color: aliceblue;
+    height: 650px;
+    width: 650px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.listScheduled h2{
+    font-size: 30px;
+    text-align: center;
+    color: silver;
+}
+.listScheduled ul{
+    overflow-y: scroll;
+    overflow-x: none;
+    max-height: 650px;
+
+}
+.scheduledItem{
+    margin: 15px;
+    padding: 40px 80px;
+    background-color: aliceblue;
+    border-radius: 25px;
+    width: 500px;
+    
+}
+.scheduledItem h3{
+    font-size: 30px;
+}
+.scheduledItem p{
+    font-size: 20px;
+}
