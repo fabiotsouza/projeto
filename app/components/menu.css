@@ -1,0 +1,39 @@
+.menuSup {
+    background: #191d32;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.menuSup button {
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+    border: none;
+    background-color: transparent;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.dropdownMenu{
+    position: absolute;
+    background-color: #191d32;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.dropdownItem{
+    color: aliceblue;
+    padding: 5px;
+    font-size: 20px;
+
+}
+ul{
+    list-style-type: none;
+    
+}
+.dropdownMenu ul  li:hover{
+    background-color: #494850;
+    cursor: pointer;
+}
