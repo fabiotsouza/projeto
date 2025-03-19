@@ -56,6 +56,8 @@ function Pagina_jose() {
     setSelecao({ linha: 0, tipo: 'nome' }); 
   };
 
+
+
   return (
 
 
@@ -109,7 +111,7 @@ function Pagina_jose() {
 
             <button onClick={salvarDados}>Finalizar</button><br/><br/><br/>
             <button onClick={adicionarLinha}>Adicionar Linha</button><br/><br/><br/>
-            <button onClick={apagarLinha}>Apagar Linha</button>
+            
 
 
 
@@ -139,6 +141,7 @@ function Pagina_jose() {
               <th> NOME </th>
               <th> FOTO </th>
               <th> PREÇO </th>
+              <th> APAGAR </th>
             </tr>
 
 
@@ -211,8 +214,19 @@ function Pagina_jose() {
                       {imagem.preco || "Preço"}
                     </span>
                   )}
+
+                   
                 </td>
+
+                <td className="corte">
+                 
+                 <button onClick={apagarLinha}>Apagar Linha</button>
+
+                </td>
+
+               
               </tr>
+              
             ))}
           </tbody>
         </table>
