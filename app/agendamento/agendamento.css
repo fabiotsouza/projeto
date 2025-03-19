@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+
+body{
+    background-color: rgb(153, 153, 153);
+    font-family: "Rubik", sans-serif;
+}
+
+input{
+    padding: 10px;
+    border-radius: 20px;
+    border: 3px solid grey;
+    text-align: center;
+    font-size: 20px;
+    margin: auto;
+}
+
+.agendamento{
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 20px;
+    border: 3px solid grey;
+    font-size: 20px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.centralizar{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.imagemCorte{
+    margin: 50px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    display: flex;
+    border: 3px solid black;
+}
+
+.nomeCorte{
+    padding: 10px;
+    font-size: 20px;
+    margin-left: 50px;
+    position: absolute;
+    left: 47%;
+}
+
+.agendar{
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    position: absolute;
+    left: 50%;
+    margin-top: 40px;
+    
+}
+
+.telaAgendamento{
+    padding: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    display: block;
+    border-radius: 30px;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+}
+
+.preco{
+    position: absolute;
+    left: 52.5%;
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+.tamanhoImagem{
+    width: 130px;
+    height: 130px;
+}
