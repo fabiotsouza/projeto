@@ -1,5 +1,5 @@
 'use client'
-import "../../font-awesome-v6.6"
+
 import "./menu.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faHouse, faScissors, faFile } from "@fortawesome/free-solid-svg-icons"

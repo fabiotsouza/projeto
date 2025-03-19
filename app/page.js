@@ -13,7 +13,7 @@ return (
       <section id="hero">
         <img
           className="grad"
-          src="https://www.institutowalcosta.com.br/wp-content/uploads/2021/09/barbeiro-saiba-tudo-sobre-essa-profissao-1024x683.jpg"
+          src="/imagens/barbeiro-home.jpg"
           alt="Hero"
         />
         <h2>A MELHOR EXPERIÊNCIA NA BARBEARIA</h2>
