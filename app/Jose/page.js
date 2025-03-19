@@ -6,19 +6,15 @@ import "./projeto1.css";
 function Pagina_jose() {
 
   const [imagens, setImagens] = useState([
-
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null }
-    
-    
   ]);
 
   const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
 
-  
   useEffect(() => {
     const dadosSalvos = localStorage.getItem('imagens');
     if (dadosSalvos) {
@@ -26,14 +22,12 @@ function Pagina_jose() {
     }
   }, []);
 
-  
   const handleTextChange = (e) => {
     const newImagens = [...imagens];
     newImagens[selecao.linha][selecao.tipo] = e.target.value;
     setImagens(newImagens);
   };
 
-  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -47,10 +41,19 @@ function Pagina_jose() {
     }
   };
 
-  
   const salvarDados = () => {
     localStorage.setItem('imagens', JSON.stringify(imagens));
     alert('Alterações salvas com sucesso!');
+  };
+
+  const adicionarLinha = () => {
+    setImagens([...imagens, { nome: null, corte: null, preco: null }]);
+  };
+
+  const apagarLinha = () => {
+    const newImagens = imagens.filter((_, index) => index !== selecao.linha);
+    setImagens(newImagens);
+    setSelecao({ linha: 0, tipo: 'nome' }); 
   };
 
   return (
@@ -61,10 +64,16 @@ function Pagina_jose() {
 
 
 
-
-
-
     <div>
+
+
+
+
+
+
+
+
+
       <div className="logo">
         <button><i className="fa-solid fa-list"></i> Menu</button>
         <img
@@ -81,35 +90,43 @@ function Pagina_jose() {
 
 
 
+
+
+
+
+
+
+
       <div className="container">
-
-
-
-
-
-
         <div className="ADcortes">
+          <br/>
           <h2>Alterar Cortes</h2>
 
-          
-          
-          <div className="item">
-            <button onClick={() => document.getElementById('imageUpload').click()}>Adicionar Novo Corte</button>
-            <input
-              type="file"
-              id="imageUpload"
-              style={{ display: 'none' }}
-              onChange={handleImageChange}
-            />
+
+          <div className="final">
+
+
+
+            <button onClick={salvarDados}>Finalizar</button><br/><br/><br/>
+            <button onClick={adicionarLinha}>Adicionar Linha</button><br/><br/><br/>
+            <button onClick={apagarLinha}>Apagar Linha</button>
+
+
+
           </div>
+
+          
         </div>
 
 
 
+
+
+
+
+
+
         <table style={{ width: '100%' }}>
-
-
-
           <tbody>
 
 
@@ -134,10 +151,17 @@ function Pagina_jose() {
 
 
 
-           
+
+
+
+
+
+
+
+
+
             {imagens.map((imagem, index) => (
               <tr key={index}>
-                
                 <td className="corte">
                   {selecao.linha === index && selecao.tipo === 'nome' ? (
                     <input
@@ -153,16 +177,27 @@ function Pagina_jose() {
                   )}
                 </td>
 
-                
                 <td className="corte">
                   <img
+
                     src={imagem.corte || "https://via.placeholder.com/80"}
                     alt={`Corte da linha ${index + 1}`}
                     onClick={() => setSelecao({ linha: index, tipo: 'corte' })}
+                    
                   />
+
+                    <div className="item">
+                      <button onClick={() => document.getElementById('imageUpload').click()}>Adicionar Novo Corte</button>
+                      <input
+                        type="file"
+                        id="imageUpload"
+                        style={{ display: 'none' }}
+                        onChange={handleImageChange}
+                      />
+                    </div>
+
                 </td>
 
-                
                 <td className="corte">
                   {selecao.linha === index && selecao.tipo === 'preco' ? (
                     <input
@@ -185,22 +220,17 @@ function Pagina_jose() {
 
 
 
-
-
-
-
-
-      <div className="final">
         
-        <button onClick={salvarDados}>Finalizar</button>
-      </div>
 
 
 
 
 
-        <script src="font-awesome-v6.6.js"></script>
+      
 
+
+
+      <script src="font-awesome-v6.6.js"></script>
     </div>
   );
 }

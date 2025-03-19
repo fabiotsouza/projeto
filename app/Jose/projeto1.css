@@ -118,32 +118,42 @@ body {
     border: 2px solid #ccc;
     margin-bottom: 20px;
     padding: 15px;
-    border-radius: 8px;
     background-color: #F9F9F9;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     margin: 30px;
+    border: none;
     
     
 }
 
 .final {
+
     text-align: center;
     margin-top: 20px;
+    margin-block: 40px;
+    
+    
+    
+
+    
+    
+    
+    
     
     
 }
 
 .final button {
-    padding: 10px 20px;
+    padding: 25px;
     font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #808080;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    
 
 }
 
 .final button:hover {
-    background-color: #45a049;
+    background-color: #696969;
 }
