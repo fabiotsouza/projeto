@@ -223,8 +223,8 @@ function Pagina_jose() {
 
 
 
-
-                <td className="corte">
+                
+                <td className="corte">  
                   <img
                     src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80"} 
                     alt={`Corte da linha ${index + 1}`}
