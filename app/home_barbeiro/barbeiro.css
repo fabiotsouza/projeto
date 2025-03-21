@@ -31,12 +31,14 @@ body{
 .listScheduled h2{
     font-size: 30px;
     text-align: center;
-    color: silver;
+    color: aliceblue;
 }
 .listScheduled ul{
     overflow-y: scroll;
     overflow-x: none;
     max-height: 650px;
+    scrollbar-color: silver rgba(255, 166, 0, 0);
+    scrollbar-width: thin;
 
 }
 .scheduledItem{

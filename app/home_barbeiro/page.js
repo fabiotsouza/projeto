@@ -15,8 +15,9 @@ function HomeBarbeiro() {
                 </div>
                 <div className="screen">
                     <div className="calendar">
-                        <p>Calendario</p>
+                        <p>Calendário</p>
                     </div>
+                    <div className="">
                     <div className="listScheduled">
                         <h2>Agendados</h2>
                         <ul>
@@ -31,6 +32,7 @@ function HomeBarbeiro() {
                             <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
 
                         </ul>
+                    </div>
                     </div>
 
                 </div>
