@@ -1,23 +1,36 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./projeto1.css";
 
 function Pagina_jose() {
   const [imagens, setImagens] = useState([
-    { id: 1, nome: null, corte: null, preco: null },
-    { id: 2, nome: null, corte: null, preco: null },
-    { id: 3, nome: null, corte: null, preco: null }
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null },
+    { nome: null, corte: null, preco: null }
   ]);
+  
+  const [linhaSelecionada, setLinhaSelecionada] = useState(null);
+  const [exibirCampos, setExibirCampos] = useState(false); // Estado para controlar a visibilidade dos campos de nome e preço
 
-  // Função para lidar com mudanças nos campos de texto
+  // Carregar dados do localStorage quando o componente for montado
+  useEffect(() => {
+    const dadosSalvos = localStorage.getItem('imagens');
+    if (dadosSalvos) {
+      setImagens(JSON.parse(dadosSalvos));
+    }
+  }, []);
+
+  // Função para lidar com mudanças nos campos de texto (nome, preço)
   const handleTextChange = (e, tipo, index) => {
     const newImagens = [...imagens];
     newImagens[index][tipo] = e.target.value;
     setImagens(newImagens); // Atualiza o estado com os novos valores
   };
 
-  // Função para adicionar a imagem no corte da tabela
+  // Função para adicionar uma imagem ao corte da tabela
   const adicionarImagem = (e, index) => {
     const file = e.target.files[0];
     if (file) {
@@ -31,25 +44,21 @@ function Pagina_jose() {
     }
   };
 
-  // Função para adicionar uma nova linha à tabela
-  const adicionarLinha = () => {
-    const novoId = imagens.length + 1;  // Gerando um novo ID único
-    setImagens([
-      ...imagens,
-      { id: novoId, nome: null, corte: null, preco: null }
-    ]);
-  };
-
-  // Função para apagar uma linha
-  const apagarLinha = (id) => {
-    const newImagens = imagens.filter((imagem) => imagem.id !== id); // Remove a linha com o id correspondente
-    setImagens(newImagens); // Atualiza o estado
-  };
-
   // Função para salvar os dados no localStorage
   const salvarDados = () => {
     localStorage.setItem('imagens', JSON.stringify(imagens)); // Salva os dados no localStorage
     alert('Alterações salvas com sucesso!');
+  };
+
+  // Função para adicionar uma nova linha à tabela
+  const adicionarLinha = () => {
+    setImagens([...imagens, { nome: null, corte: null, preco: null }]);
+  };
+
+  // Função para apagar uma linha
+  const apagarLinha = (index) => {
+    const newImagens = imagens.filter((_, i) => i !== index);
+    setImagens(newImagens); // Atualiza o estado após apagar a linha
   };
 
   return (
@@ -77,49 +86,63 @@ function Pagina_jose() {
 
         <table style={{ width: '100%' }}>
           <tbody>
-            <tr>
+          <tr>
               <th> NOME </th>
               <th> FOTO </th>
               <th> PREÇO </th>
               <th> APAGAR </th>
             </tr>
 
-            {imagens.map((imagem) => (
-              <tr key={imagem.id}>
+            {imagens.map((imagem, index) => (
+              <tr key={index}>
                 <td className="corte">
-                  <input
-                    type="text"
-                    value={imagem.nome || ""}
-                    onChange={(e) => handleTextChange(e, 'nome', imagens.indexOf(imagem))}
-                    placeholder="Digite o nome"
-                  />
+                  <button 
+                    onClick={() => setExibirCampos(!exibirCampos)} 
+                    style={{ marginBottom: '10px' }}
+                  >
+                    {exibirCampos ? 'Ocultar campos' : 'Adicionar Nome e Preço'}
+                  </button>
+                  {exibirCampos && (
+                    <>
+                      <input
+                        type="text"
+                        value={imagem.nome || ""}
+                        onChange={(e) => handleTextChange(e, 'nome', index)}
+                        placeholder="Digite o nome"
+                        style={{
+                          border: imagem.nome ? '2px solid #000' : '1px solid #ccc', // Estilo condicional para borda
+                        }}
+                      />
+                      <input
+                        type="text"
+                        value={imagem.preco || ""}
+                        onChange={(e) => handleTextChange(e, 'preco', index)}
+                        placeholder="Digite o preço"
+                        style={{
+                          border: imagem.preco ? '2px solid #000' : '1px solid #ccc', // Estilo condicional para borda
+                        }}
+                      />
+                    </>
+                  )}
                 </td>
 
                 <td className="corte">
                   <img
-                    src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80"}
-                    alt={`Corte da linha ${imagem.id}`}
+                    src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80" }
+                    alt={`Corte da linha ${index + 1}`}
                     style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                   />
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => adicionarImagem(e, imagens.indexOf(imagem))}
+                    onChange={(e) => adicionarImagem(e, index)}
                     style={{ marginTop: '10px', padding: '5px' }}
+                    aria-label="Escolher arquivo"
                   />
                 </td>
 
                 <td className="corte">
-                  <input
-                    type="text"
-                    value={imagem.preco || ""}
-                    onChange={(e) => handleTextChange(e, 'preco', imagens.indexOf(imagem))}
-                    placeholder="Digite o preço"
-                  />
-                </td>
-
-                <td className="corte">
-                  <button onClick={() => apagarLinha(imagem.id)}>Apagar Linha</button>
+                  <button onClick={() => apagarLinha(index)}>Apagar Linha</button>
                 </td>
               </tr>
             ))}
@@ -128,6 +151,7 @@ function Pagina_jose() {
       </div>
 
       <script src="font-awesome-v6.6.js"></script>
+
     </div>
   );
 }
