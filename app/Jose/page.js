@@ -5,15 +5,16 @@ import "./projeto1.css";
 
 function Pagina_jose() {
   const [imagens, setImagens] = useState([
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null }
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null }
   ]);
 
-  const [campoNomeSelecionado, setCampoNomeSelecionado] = useState(null); // Controlar a linha do nome editável
-  const [campoPrecoSelecionado, setCampoPrecoSelecionado] = useState(null); // Controlar a linha do preço editável
+  const [campoNomeSelecionado, setCampoNomeSelecionado] = useState(null);
+  const [campoPrecoSelecionado, setCampoPrecoSelecionado] = useState(null);
+  const [campoCorteUrlSelecionado, setCampoCorteUrlSelecionado] = useState(null);
 
   // Carregar dados do localStorage quando o componente for montado
   useEffect(() => {
@@ -23,28 +24,27 @@ function Pagina_jose() {
     }
   }, []);
 
-  // Função para lidar com mudanças nos campos de texto (nome, preço)
   const handleTextChange = (e, tipo, index) => {
     const newImagens = [...imagens];
     newImagens[index][tipo] = e.target.value;
-    setImagens(newImagens); // Atualiza o estado com os novos valores
+    setImagens(newImagens);
   };
 
   // Função para salvar os dados no localStorage
   const salvarDados = () => {
-    localStorage.setItem('imagens', JSON.stringify(imagens)); // Salva os dados no localStorage
+    localStorage.setItem('imagens', JSON.stringify(imagens));
     alert('Alterações salvas com sucesso!');
   };
 
   // Função para adicionar uma nova linha à tabela
   const adicionarLinha = () => {
-    setImagens([...imagens, { nome: null, corte: null, preco: null }]);
+    setImagens([...imagens, { nome: null, corte: null, preco: null, corte_url: null }]);
   };
 
   // Função para apagar uma linha
   const apagarLinha = (index) => {
     const newImagens = imagens.filter((_, i) => i !== index);
-    setImagens(newImagens); // Atualiza o estado após apagar a linha
+    setImagens(newImagens);
   };
 
   // Função para mostrar o campo nome editável
@@ -57,23 +57,9 @@ function Pagina_jose() {
     setCampoPrecoSelecionado(index);
   };
 
-  // Função para validar se o URL é válido
-  const isImageUrl = (url) => {
-    return /\.(jpg|jpeg|png|gif|bmp|svg)$/i.test(url); // Verifica se o URL termina com uma extensão de imagem válida
-  };
-
-  // Função para adicionar a URL da imagem
-  const adicionarImagemUrl = (e, index) => {
-    const url = e.target.value;
-    const newImagens = [...imagens];
-
-    if (isImageUrl(url)) {
-      newImagens[index].corte = url; // Salva a URL da imagem
-    } else {
-      newImagens[index].corte = "https://via.placeholder.com/80"; // Caso o URL não seja válido, mostra o placeholder
-    }
-
-    setImagens(newImagens); // Atualiza o estado com a nova URL da imagem
+  // Função para mostrar o campo corte_url editável
+  const ativarCampoCorteUrl = (index) => {
+    setCampoCorteUrlSelecionado(index);
   };
 
   return (
@@ -118,34 +104,40 @@ function Pagina_jose() {
                       value={imagem.nome || ""}
                       onChange={(e) => handleTextChange(e, 'nome', index)}
                       placeholder="Digite o nome"
-                      onBlur={() => setCampoNomeSelecionado(null)} // Remove o campo de edição quando sai do input
+                      onBlur={() => setCampoNomeSelecionado(null)}
                       autoFocus
-                      style={{
-                        border: imagem.nome ? '2px solid #000' : '1px solid #ccc',
-                      }}
                     />
                   ) : (
-                    <span onClick={() => ativarCampoNome(index)} style={{ cursor: 'pointer' }}>
-                      {imagem.nome || "Clique para editar o nome"}
+                    <span onClick={() => ativarCampoNome(index)}>
+                      {imagem.nome || "Clique para editar nome"}
                     </span>
                   )}
                 </td>
 
                 {/* Foto */}
                 <td className="corte">
-                  <img
-                    src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80"}
-                    alt={`Corte da linha ${index + 1}`}
-                    style={{ width: '80px', height: '80px', objectFit: 'cover' }}
-                  />
-                  <input
-                    type="text"
-                    value={imagem.corte || ""}
-                    onChange={(e) => adicionarImagemUrl(e, index)}
-                    placeholder="Cole o URL da imagem"
-                    style={{ marginTop: '10px', padding: '5px', width: '100%' }}
-                    aria-label="Inserir URL da imagem"
-                  />
+                  {campoCorteUrlSelecionado === index ? (
+                    <input
+                      type="text"
+                      value={imagem.corte_url || ""}
+                      onChange={(e) => handleTextChange(e, 'corte_url', index)}
+                      placeholder="Digite a URL da imagem"
+                      onBlur={() => setCampoCorteUrlSelecionado(null)}
+                      autoFocus
+                    />
+                  ) : (
+                    <span onClick={() => ativarCampoCorteUrl(index)}>
+                      {imagem.corte_url ? (
+                        <img
+                          src={imagem.corte_url}
+                          alt={`Corte da linha ${index + 1}`}
+                          style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        "Clique para adicionar URL da imagem"
+                      )}
+                    </span>
+                  )}
                 </td>
 
                 {/* Preço */}
@@ -156,15 +148,12 @@ function Pagina_jose() {
                       value={imagem.preco || ""}
                       onChange={(e) => handleTextChange(e, 'preco', index)}
                       placeholder="Digite o preço"
-                      onBlur={() => setCampoPrecoSelecionado(null)} // Remove o campo de edição quando sai do input
+                      onBlur={() => setCampoPrecoSelecionado(null)}
                       autoFocus
-                      style={{
-                        border: imagem.preco ? '2px solid #000' : '1px solid #ccc',
-                      }}
                     />
                   ) : (
-                    <span onClick={() => ativarCampoPreco(index)} style={{ cursor: 'pointer' }}>
-                      {imagem.preco || "Clique para editar o preço"}
+                    <span onClick={() => ativarCampoPreco(index)}>
+                      {imagem.preco || "Clique para editar preço"}
                     </span>
                   )}
                 </td>

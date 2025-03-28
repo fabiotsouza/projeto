@@ -7,8 +7,8 @@ SELECT * FROM cortes WHERE nome LIKE 'Bu%';
 SELECT * FROM cortes WHERE nome LIKE 'Po%';
 
 
-SELECT * FROM cortes WHERE preco >= 20;
-SELECT * FROM cortes WHERE preco <= 120;
+SELECT * FROM cortes WHERE preco >= 20 AND preco <= 50;
+SELECT * FROM cortes WHERE preco >= 60;
 
 REMOVE FROM cortes WHERE id = 1;
 
@@ -17,3 +17,4 @@ INSERT INTO cortes (nome, preco, imagem) VALUES ('Undercut', 45.00, 'https://via
 INSERT INTO cortes (nome, preco, imagem) VALUES ('Black Power',  50.00, 'https://via.placeholder.com/80');
 INSERT INTO cortes (nome, preco, imagem) VALUES ('Buzzed', 60.00, 'https://via.placeholder.com/80');
 INSERT INTO cortes (nome, preco, imagem) VALUES ('Pompadour', 120.00, 'https://via.placeholder.com/80');
+
