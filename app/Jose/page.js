@@ -120,8 +120,8 @@ function Pagina_jose() {
                       }}
                     />
                   ) : (
-                    <span onClick={() => ativarCampoNome(index)}>
-                      {imagem.nome || ""}
+                    <span onClick={() => ativarCampoNome(index)} style={{ cursor: 'pointer' }}>
+                      {imagem.nome || "Clique para editar o nome"}
                     </span>
                   )}
                 </td>
@@ -157,8 +157,8 @@ function Pagina_jose() {
                       }}
                     />
                   ) : (
-                    <span onClick={() => ativarCampoPreco(index)}>
-                      {imagem.preco || ""}
+                    <span onClick={() => ativarCampoPreco(index)} style={{ cursor: 'pointer' }}>
+                      {imagem.preco || "Clique para editar o preço"}
                     </span>
                   )}
                 </td>
