@@ -11,9 +11,9 @@ function Pagina_jose() {
     { nome: null, corte: null, preco: null },
     { nome: null, corte: null, preco: null }
   ]);
-  
-  const [linhaSelecionada, setLinhaSelecionada] = useState(null);
-  const [exibirCampos, setExibirCampos] = useState(false); // Estado para controlar a visibilidade dos campos de nome e preço
+
+  const [campoNomeSelecionado, setCampoNomeSelecionado] = useState(null); // Controlar a linha do nome editável
+  const [campoPrecoSelecionado, setCampoPrecoSelecionado] = useState(null); // Controlar a linha do preço editável
 
   // Carregar dados do localStorage quando o componente for montado
   useEffect(() => {
@@ -61,6 +61,16 @@ function Pagina_jose() {
     setImagens(newImagens); // Atualiza o estado após apagar a linha
   };
 
+  // Função para mostrar o campo nome editável
+  const ativarCampoNome = (index) => {
+    setCampoNomeSelecionado(index);
+  };
+
+  // Função para mostrar o campo preço editável
+  const ativarCampoPreco = (index) => {
+    setCampoPrecoSelecionado(index);
+  };
+
   return (
     <div>
       <div className="logo">
@@ -86,7 +96,7 @@ function Pagina_jose() {
 
         <table style={{ width: '100%' }}>
           <tbody>
-          <tr>
+            <tr>
               <th> NOME </th>
               <th> FOTO </th>
               <th> PREÇO </th>
@@ -95,40 +105,31 @@ function Pagina_jose() {
 
             {imagens.map((imagem, index) => (
               <tr key={index}>
+                {/* Nome */}
                 <td className="corte">
-                  <button 
-                    onClick={() => setExibirCampos(!exibirCampos)} 
-                    style={{ marginBottom: '10px' }}
-                  >
-                    {exibirCampos ? 'Ocultar campos' : 'Adicionar Nome e Preço'}
-                  </button>
-                  {exibirCampos && (
-                    <>
-                      <input
-                        type="text"
-                        value={imagem.nome || ""}
-                        onChange={(e) => handleTextChange(e, 'nome', index)}
-                        placeholder="Digite o nome"
-                        style={{
-                          border: imagem.nome ? '2px solid #000' : '1px solid #ccc', // Estilo condicional para borda
-                        }}
-                      />
-                      <input
-                        type="text"
-                        value={imagem.preco || ""}
-                        onChange={(e) => handleTextChange(e, 'preco', index)}
-                        placeholder="Digite o preço"
-                        style={{
-                          border: imagem.preco ? '2px solid #000' : '1px solid #ccc', // Estilo condicional para borda
-                        }}
-                      />
-                    </>
+                  {campoNomeSelecionado === index ? (
+                    <input
+                      type="text"
+                      value={imagem.nome || ""}
+                      onChange={(e) => handleTextChange(e, 'nome', index)}
+                      placeholder="Digite o nome"
+                      onBlur={() => setCampoNomeSelecionado(null)} // Remove o campo de edição quando sai do input
+                      autoFocus
+                      style={{
+                        border: imagem.nome ? '2px solid #000' : '1px solid #ccc',
+                      }}
+                    />
+                  ) : (
+                    <span onClick={() => ativarCampoNome(index)}>
+                      {imagem.nome || ""}
+                    </span>
                   )}
                 </td>
 
+                {/* Foto */}
                 <td className="corte">
                   <img
-                    src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80" }
+                    src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80"}
                     alt={`Corte da linha ${index + 1}`}
                     style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                   />
@@ -141,6 +142,28 @@ function Pagina_jose() {
                   />
                 </td>
 
+                {/* Preço */}
+                <td className="corte">
+                  {campoPrecoSelecionado === index ? (
+                    <input
+                      type="text"
+                      value={imagem.preco || ""}
+                      onChange={(e) => handleTextChange(e, 'preco', index)}
+                      placeholder="Digite o preço"
+                      onBlur={() => setCampoPrecoSelecionado(null)} // Remove o campo de edição quando sai do input
+                      autoFocus
+                      style={{
+                        border: imagem.preco ? '2px solid #000' : '1px solid #ccc',
+                      }}
+                    />
+                  ) : (
+                    <span onClick={() => ativarCampoPreco(index)}>
+                      {imagem.preco || ""}
+                    </span>
+                  )}
+                </td>
+
+                {/* Botão Apagar */}
                 <td className="corte">
                   <button onClick={() => apagarLinha(index)}>Apagar Linha</button>
                 </td>
@@ -151,7 +174,6 @@ function Pagina_jose() {
       </div>
 
       <script src="font-awesome-v6.6.js"></script>
-
     </div>
   );
 }
