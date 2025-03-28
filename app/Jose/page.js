@@ -63,6 +63,12 @@ function Pagina_jose() {
   };
 
   return (
+
+
+
+
+
+
     <div>
       <div className="logo">
         <button><i className="fa-solid fa-list"></i> Menu</button>
@@ -73,6 +79,17 @@ function Pagina_jose() {
         />
         <a href="https://gaming.amazon.com/home" target="_blank" className="logo-link">Instagram</a>
       </div>
+
+
+
+
+
+
+
+
+
+
+
 
       <div className="container">
         <div className="ADcortes">
@@ -85,14 +102,39 @@ function Pagina_jose() {
           </div>
         </div>
 
+
+
+
+
+
+
+
+
+
         <table style={{ width: '100%' }}>
+
+          
           <tbody>
+
+
+
+
+
             <tr>
               <th> NOME </th>
               <th> FOTO </th>
               <th> PREÇO </th>
               <th> APAGAR </th>
             </tr>
+
+
+
+
+
+
+
+
+
 
             {imagens.map((imagem, index) => (
               <tr key={index}>
@@ -158,6 +200,15 @@ function Pagina_jose() {
                   )}
                 </td>
 
+
+
+
+
+
+
+
+
+
                 {/* Botão Apagar */}
                 <td className="corte">
                   <button onClick={() => apagarLinha(index)}>Apagar Linha</button>
@@ -167,6 +218,10 @@ function Pagina_jose() {
           </tbody>
         </table>
       </div>
+
+
+
+
 
       <script src="font-awesome-v6.6.js"></script>
     </div>
