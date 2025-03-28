@@ -30,20 +30,6 @@ function Pagina_jose() {
     setImagens(newImagens); // Atualiza o estado com os novos valores
   };
 
-  // Função para adicionar uma imagem ao corte da tabela
-  const adicionarImagem = (e, index) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const newImagens = [...imagens];
-        newImagens[index].corte = reader.result;  // Salva a imagem no formato base64
-        setImagens(newImagens); // Atualiza o estado com a nova imagem
-      };
-      reader.readAsDataURL(file);  // Converte a imagem para base64
-    }
-  };
-
   // Função para salvar os dados no localStorage
   const salvarDados = () => {
     localStorage.setItem('imagens', JSON.stringify(imagens)); // Salva os dados no localStorage
@@ -69,6 +55,25 @@ function Pagina_jose() {
   // Função para mostrar o campo preço editável
   const ativarCampoPreco = (index) => {
     setCampoPrecoSelecionado(index);
+  };
+
+  // Função para validar se o URL é válido
+  const isImageUrl = (url) => {
+    return /\.(jpg|jpeg|png|gif|bmp|svg)$/i.test(url); // Verifica se o URL termina com uma extensão de imagem válida
+  };
+
+  // Função para adicionar a URL da imagem
+  const adicionarImagemUrl = (e, index) => {
+    const url = e.target.value;
+    const newImagens = [...imagens];
+
+    if (isImageUrl(url)) {
+      newImagens[index].corte = url; // Salva a URL da imagem
+    } else {
+      newImagens[index].corte = "https://via.placeholder.com/80"; // Caso o URL não seja válido, mostra o placeholder
+    }
+
+    setImagens(newImagens); // Atualiza o estado com a nova URL da imagem
   };
 
   return (
@@ -134,11 +139,12 @@ function Pagina_jose() {
                     style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                   />
                   <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => adicionarImagem(e, index)}
-                    style={{ marginTop: '10px', padding: '5px' }}
-                    aria-label="Escolher arquivo"
+                    type="text"
+                    value={imagem.corte || ""}
+                    onChange={(e) => adicionarImagemUrl(e, index)}
+                    placeholder="Cole o URL da imagem"
+                    style={{ marginTop: '10px', padding: '5px', width: '100%' }}
+                    aria-label="Inserir URL da imagem"
                   />
                 </td>
 
