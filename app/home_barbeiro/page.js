@@ -2,6 +2,8 @@
 import "../components/Menu.js"
 import Menu from "../components/Menu";
 import "./barbeiro.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen } from "@fortawesome/free-solid-svg-icons"
 
 
 function HomeBarbeiro() {
@@ -17,11 +19,11 @@ function HomeBarbeiro() {
                     <div className="calendar">
                         <p>Calendário</p>
                     </div>
-                    <div className="">
+                    <div className="back">
                     <div className="listScheduled">
                         <h2>Agendados</h2>
                         <ul>
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
+                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" hour="" />
                             <ScheduledItem name="Dan" cut="Corte do Moica" time="12:00" price="23" />
                             <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
                             <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
@@ -45,9 +47,8 @@ function ScheduledItem(e) {
     return (
         <li className="scheduledItem">
             <h3>{e.name}</h3>
-            <p>{e.cut} - R${e.price}</p>
-            <p>{e.time}</p>
-
+            <p><strong>Hora agendada:</strong> {e.time}</p>
+            <p className="color">{e.cut} - R${e.price}</p>
         </li>
     )
 }
