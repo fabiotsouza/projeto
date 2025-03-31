@@ -5,18 +5,18 @@ import "./projeto1.css";
 
 function Pagina_jose() {
   const [imagens, setImagens] = useState([
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null },
-    { nome: null, corte: null, preco: null }
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null },
+    { nome: null, corte: null, preco: null, corte_url: null }
   ]);
 
-  const [selecao, setSelecao] = useState({ linha: 0, tipo: 'nome' });
-  const [urlVisivel, setUrlVisivel] = useState(false);
-  const [urlImagem, setUrlImagem] = useState('');
+  const [campoNomeSelecionado, setCampoNomeSelecionado] = useState(null);
+  const [campoPrecoSelecionado, setCampoPrecoSelecionado] = useState(null);
+  const [campoCorteUrlSelecionado, setCampoCorteUrlSelecionado] = useState(null);
 
-  
+  // Carregar dados do localStorage quando o componente for montado
   useEffect(() => {
     const dadosSalvos = localStorage.getItem('imagens');
     if (dadosSalvos) {
@@ -24,50 +24,51 @@ function Pagina_jose() {
     }
   }, []);
 
-  
-  const handleTextChange = (e) => {
+  const handleTextChange = (e, tipo, index) => {
     const newImagens = [...imagens];
-    newImagens[selecao.linha][selecao.tipo] = e.target.value;
+    newImagens[index][tipo] = e.target.value;
     setImagens(newImagens);
   };
 
-  
-  const handleImageUrlChange = (e) => {
-    setUrlImagem(e.target.value);
-  };
-
-  
-  const salvarImagemUrl = () => {
-    if (urlImagem) {
-      const newImagens = [...imagens];
-      newImagens[selecao.linha].corte = urlImagem;
-      setImagens(newImagens);
-      setUrlVisivel(false);
-      setUrlImagem('');
-    } else {
-      alert("Por favor, insira uma URL válida.");
-    }
-  };
-
- 
+  // Função para salvar os dados no localStorage
   const salvarDados = () => {
     localStorage.setItem('imagens', JSON.stringify(imagens));
     alert('Alterações salvas com sucesso!');
   };
 
-  
+  // Função para adicionar uma nova linha à tabela
   const adicionarLinha = () => {
-    setImagens([...imagens, { nome: null, corte: null, preco: null }]);
+    setImagens([...imagens, { nome: null, corte: null, preco: null, corte_url: null }]);
   };
 
- 
+  // Função para apagar uma linha
   const apagarLinha = (index) => {
     const newImagens = imagens.filter((_, i) => i !== index);
     setImagens(newImagens);
-    setSelecao({ linha: 0, tipo: 'nome' });
+  };
+
+  // Função para mostrar o campo nome editável
+  const ativarCampoNome = (index) => {
+    setCampoNomeSelecionado(index);
+  };
+
+  // Função para mostrar o campo preço editável
+  const ativarCampoPreco = (index) => {
+    setCampoPrecoSelecionado(index);
+  };
+
+  // Função para mostrar o campo corte_url editável
+  const ativarCampoCorteUrl = (index) => {
+    setCampoCorteUrlSelecionado(index);
   };
 
   return (
+
+
+
+
+
+
     <div>
       <div className="logo">
         <button><i className="fa-solid fa-list"></i> Menu</button>
@@ -79,55 +80,21 @@ function Pagina_jose() {
         <a href="https://gaming.amazon.com/home" target="_blank" className="logo-link">Instagram</a>
       </div>
 
+
+
+
+
+
+
+
+
+
+
+
       <div className="container">
         <div className="ADcortes">
-
-
-
-
-
           <br />
           <h2>Alterar Cortes</h2>
-
-
-
-
-
-
-
-          <div className="final">
-            <button onClick={() => setUrlVisivel(!urlVisivel)}>
-              {urlVisivel ? 'Cancelar' : 'Adicionar Novo Corte via URL'}
-            </button>
-          </div>
-
-
-
-
-
-
-
-          {urlVisivel && (
-            <div>
-              <input
-                type="text"
-                value={urlImagem}
-                onChange={handleImageUrlChange}
-                placeholder="Insira a URL da imagem"
-                style={{ marginTop: '10px', padding: '5px', width: '100%' }}
-              />
-              <button onClick={salvarImagemUrl} style={{ marginTop: '10px' }}>
-                Salvar Imagem
-              </button>
-            </div>
-          )}
-
-
-
-
-
-
-
 
           <div className="final">
             <button onClick={salvarDados}>Finalizar</button><br /><br /><br />
@@ -140,16 +107,14 @@ function Pagina_jose() {
 
 
 
+
+
+
+
         <table style={{ width: '100%' }}>
 
-
-
+          
           <tbody>
-
-
-
-
-
 
 
 
@@ -172,87 +137,65 @@ function Pagina_jose() {
 
 
             {imagens.map((imagem, index) => (
-
-
-
-
-
-
               <tr key={index}>
-
-
-
-
-
-
-
-
-
-
-
-
-
+                {/* Nome */}
                 <td className="corte">
-                  {selecao.linha === index && selecao.tipo === 'nome' ? (
+                  {campoNomeSelecionado === index ? (
                     <input
                       type="text"
                       value={imagem.nome || ""}
-                      onChange={handleTextChange}
+                      onChange={(e) => handleTextChange(e, 'nome', index)}
                       placeholder="Digite o nome"
+                      onBlur={() => setCampoNomeSelecionado(null)}
+                      autoFocus
                     />
                   ) : (
-                    <span onClick={() => setSelecao({ linha: index, tipo: 'nome' })}>
-                      {imagem.nome || "Nome"}
+                    <span onClick={() => ativarCampoNome(index)}>
+                      {imagem.nome || "Clique para editar nome"}
                     </span>
                   )}
                 </td>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-                <td className="corte">  
-                  <img
-                    src={imagem.corte ? imagem.corte : "https://via.placeholder.com/80"} 
-                    alt={`Corte da linha ${index + 1}`}
-                    onClick={() => setSelecao({ linha: index, tipo: 'corte' })}
-                    style={{ width: '80px', height: '80px', objectFit: 'cover' }}
-                  />
+                {/* Foto */}
+                <td className="corte">
+                  {campoCorteUrlSelecionado === index ? (
+                    <input
+                      type="text"
+                      value={imagem.corte_url || ""}
+                      onChange={(e) => handleTextChange(e, 'corte_url', index)}
+                      placeholder="Digite a URL da imagem"
+                      onBlur={() => setCampoCorteUrlSelecionado(null)}
+                      autoFocus
+                    />
+                  ) : (
+                    <span onClick={() => ativarCampoCorteUrl(index)}>
+                      {imagem.corte_url ? (
+                        <img
+                          src={imagem.corte_url}
+                          alt={`Corte da linha ${index + 1}`}
+                          style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        "Clique para adicionar URL da imagem"
+                      )}
+                    </span>
+                  )}
                 </td>
 
-
-
-
-
-
-
-
-
-
+                {/* Preço */}
                 <td className="corte">
-                  {selecao.linha === index && selecao.tipo === 'preco' ? (
+                  {campoPrecoSelecionado === index ? (
                     <input
                       type="text"
                       value={imagem.preco || ""}
-                      onChange={handleTextChange}
+                      onChange={(e) => handleTextChange(e, 'preco', index)}
                       placeholder="Digite o preço"
+                      onBlur={() => setCampoPrecoSelecionado(null)}
+                      autoFocus
                     />
                   ) : (
-                    <span onClick={() => setSelecao({ linha: index, tipo: 'preco' })}>
-                      {imagem.preco || "Preço"}
+                    <span onClick={() => ativarCampoPreco(index)}>
+                      {imagem.preco || "Clique para editar preço"}
                     </span>
                   )}
                 </td>
@@ -260,6 +203,13 @@ function Pagina_jose() {
 
 
 
+
+
+
+
+
+
+                {/* Botão Apagar */}
                 <td className="corte">
                   <button onClick={() => apagarLinha(index)}>Apagar Linha</button>
                 </td>
@@ -268,12 +218,6 @@ function Pagina_jose() {
           </tbody>
         </table>
       </div>
-
-
-
-
-
-
 
 
 
