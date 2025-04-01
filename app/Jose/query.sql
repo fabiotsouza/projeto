@@ -11,14 +11,14 @@ SELECT * FROM cortes;
 
 -- deletar tudo de um corte 
 
-DELETE * FROM cortes WHERE nome = 'Degrade'
+DELETE * FROM cortes WHERE nome = 'Degrade';
 
 
 
 
--- remover cortes da lista algo especifico
+-- remover algo especifico de um corte 
 
-REMOVE FROM cortes WHERE id = 1;
+UPDATE cortes SET nome = NULL WHERE nome = 'degrade';
 
 
 

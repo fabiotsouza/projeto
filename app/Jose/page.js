@@ -3,6 +3,11 @@
 import { useState, useEffect } from "react";
 import "./projeto1.css";
 
+
+
+
+
+
 function Pagina_jose() {
   const [imagens, setImagens] = useState([
     { nome: null, corte: null, preco: null, corte_url: null },
@@ -64,12 +69,17 @@ function Pagina_jose() {
 
   return (
 
-
+    
 
 
 
 
     <div>
+
+
+       
+
+
       <div className="logo">
         <button><i className="fa-solid fa-list"></i> Menu</button>
         <img
@@ -94,7 +104,11 @@ function Pagina_jose() {
       <div className="container">
         <div className="ADcortes">
           <br />
+
+
           <h2>Alterar Cortes</h2>
+
+
 
           <div className="final">
             <button onClick={salvarDados}>Finalizar</button><br /><br /><br />
@@ -113,7 +127,7 @@ function Pagina_jose() {
 
         <table style={{ width: '100%' }}>
 
-          
+
           <tbody>
 
 
