@@ -1,18 +1,36 @@
 'use client'
 
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import "./agendamento.css"
 import Corte from"./components/Corte.js"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 
 
 
 function Agendamento() {
 
-    const[agendamento, setAgendamento] = useState(true)
-    const[verCortes, setVerCortes] = useState(false)   
+    const[agendamento, setAgendamento] = useState(false)
+    const[verCortes, setVerCortes] = useState(true)   
+    const[cortes, alteraCortes] = useState([])
 
+    const [pesquisa, alteraPesquisa] = useState("")
 
+    async function buscaTodos(){
+        const response = await  axios.get("http://localhost:3000/api/cortes")
+        alteraCortes(response.data)
+    }
+
+    async function buscaPorNome(nome){
+        const response = await axios.get("http://localhost:3000/api/cortes")
+        alteraCortes(response.data)
+    }
+
+    useEffect(()=> {
+        buscaTodos()
+    }, [])
 
     return ( 
         <div>
@@ -23,7 +41,7 @@ function Agendamento() {
                         <input type="date"/>
                         <input type="time"/>
                         <div >                            
-                            <button className="agendamento" onClick={()=> {setVerCortes(true); setAgendamento(false)}}>Ver corte2522s</button>
+                            <button className="agendamento" onClick={()=> {setVerCortes(false); setAgendamento(true)}}>Ver cortes</button>
                         </div>
                     </div>
             }
@@ -34,7 +52,8 @@ function Agendamento() {
             {
                 verCortes == true &&
                 <div className="centralizar">
-                    <input type="search" placeholder="Pesquisar"/>
+                    <input type="search" placeholder="Pesquisar" onChange={(e)=> alteraPesquisa(e.target.value)}/>
+                    <button className="pesquisa" onClick={()=> buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                     <div>
                         <Corte image="https://pm1.narvii.com/6532/3b861844e83e90e04b4e7a08a06694bdde4216c8_hq.jpg" nome="Corte do Zeca" preco="15"/>
                         <Corte image="https://www.lance.com.br/files/article_main/uploads/2018/11/15/5bedcf90501e4.jpeg" nome="Corte do Fenômeno" preco="15"/>

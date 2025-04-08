@@ -1,8 +1,14 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import './Tela_Inicial.css'; // Importando o CSS
 
 function Inicio() {
+
+    const [email, alteraEmail] = useState([])
+    const [senha, alteraSenha] = useState([])
+
+    const [login, alteraLogin] = useState(0)
+    
 
 return (
     <div>
@@ -32,7 +38,7 @@ return (
         </form>
       </section>
 
-      <section id="cadastro">
+      <div id="cadastro">
         <h3>Cadastro</h3>
         <form>
           <label htmlFor="cadastro-email">E-mail:</label>
@@ -41,11 +47,11 @@ return (
           <input type="password" id="cadastro-password" name="cadastro-password" required />
           <button type="submit">Cadastrar</button>
         </form>
-      </section>
+      </div>
 
-      <section id="entrar">
+      <div id="entrar">
         <a href="#" className="btn">Navegar sem Logar</a>
-      </section>
+      </div>
 
       <footer>
         <h4>Contatos</h4>

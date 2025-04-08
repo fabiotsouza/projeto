@@ -1,6 +1,14 @@
 'use client'
 
+import { useState } from "react";
+
 function Cortes(attr) {
+
+
+    function agendar(){
+
+    }
+
     return ( 
 
         <div>
@@ -14,7 +22,7 @@ function Cortes(attr) {
                 </div>
                 <div>
                     <br/><br/>
-                    <button className="agendar">Agendar</button>                   
+                    <button className="agendar" onClick={()=> window.location.href = '/agendamento'}>Agendar</button>                   
                 </div>
             </div>
         </div>
