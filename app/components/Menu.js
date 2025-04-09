@@ -4,6 +4,7 @@ import "./menu.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faHouse, faScissors, faFile } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react";
+import { redirect } from "next/navigation";
 
 
 function Menu() {
@@ -21,8 +22,8 @@ function Menu() {
                     
                 <div className="dropdownMenu">
                     <ul>
-                        <DropdownItem icon={faHouse} text={" Home"}/>
-                        <DropdownItem icon={faScissors} text={" Cortes"}/>
+                        <DropdownItem  icon={faHouse} text={" Home"} onClick={()=> redirect("./")}/>
+                        <DropdownItem icon={faScissors} text={" Cortes"} onClick={()=> redirect("../Jose")}/>
                         <DropdownItem icon={faFile} text={" Relatório"}/>
 
                     </ul>

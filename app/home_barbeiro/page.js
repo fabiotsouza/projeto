@@ -2,11 +2,39 @@
 import "../components/Menu.js"
 import Menu from "../components/Menu";
 import "./barbeiro.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from "@fortawesome/free-solid-svg-icons"
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 
 
 function HomeBarbeiro() {
+
+    const [appointments, setAppointments] = useState([])
+
+
+    async function searchAll() {
+        const response = await axios.get("http://localhost:3000/api/agendamentos")
+        console.log(response.data) 
+        setAppointments(response.data)
+    }
+    useEffect(() => {
+        searchAll()
+    }, [])
+
+    function formataData(valor) {
+        let data = valor.split("T")[0]
+
+
+        data = data.split("-")
+        data = data.reverse()
+        data = data.join("/")
+
+
+
+        return data 
+
+    }
+
     return (
         <div>
             <Menu />
@@ -20,21 +48,24 @@ function HomeBarbeiro() {
                         <p>Calendário</p>
                     </div>
                     <div className="back">
-                    <div className="listScheduled">
-                        <h2>Agendados</h2>
-                        <ul>
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" hour="" />
-                            <ScheduledItem name="Dan" cut="Corte do Moica" time="12:00" price="23" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
-                            <ScheduledItem name="Yuri" cut="Corte coreano" time="00:00" price="100" />
+                        <div className="listScheduled">
+                            <h2>Agendados</h2>
+                            <ul>
 
-                        </ul>
-                    </div>
+                                {
+                                    appointments.map(i =>
+                                        <li className="scheduledItem">
+                                            <h3>{i.u_nome}</h3>
+                                            <p><strong>Hora agendada:</strong> {i.horario}</p>
+                                            <p className="color">{i.c_nome} - R${i.preco}</p>
+                                        </li>
+
+
+                                    )
+                                }
+
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
@@ -43,14 +74,6 @@ function HomeBarbeiro() {
         </div>
     );
 }
-function ScheduledItem(e) {
-    return (
-        <li className="scheduledItem">
-            <h3>{e.name}</h3>
-            <p><strong>Hora agendada:</strong> {e.time}</p>
-            <p className="color">{e.cut} - R${e.price}</p>
-        </li>
-    )
-}
+
 
 export default HomeBarbeiro;

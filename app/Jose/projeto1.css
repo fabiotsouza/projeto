@@ -1,5 +1,5 @@
 body {
-    background: #5c4033;
+    background-color: #494850;
     margin: 0;
     font-family: Arial, sans-serif;
     height: 100vh;
@@ -137,11 +137,12 @@ body {
 .final button {
     padding: 25px;
     font-size: 16px;
-    background-color: black;
+    background: #191d32;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
     
 
 }
