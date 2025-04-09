@@ -6,7 +6,8 @@ function Cortes(attr) {
 
 
     function agendar(){
-
+        attr.alteraVerHorario(true)
+        attr.alteraCorteSelecionado(attr.id)
     }
 
     return ( 
@@ -22,7 +23,7 @@ function Cortes(attr) {
                 </div>
                 <div>
                     <br/><br/>
-                    <button className="agendar" onClick={()=> window.location.href = '/agendamento'}>Agendar</button>                   
+                    <button className="agendar" onClick={()=> agendar() }>Agendar</button>                   
                 </div>
             </div>
         </div>

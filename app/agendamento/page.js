@@ -12,9 +12,14 @@ import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 function Agendamento() {
 
-    const[agendamento, setAgendamento] = useState(false)
+    const [verHorario, alteraVerHorario] = useState(false);
     const[verCortes, setVerCortes] = useState(true)   
+
     const[cortes, alteraCortes] = useState([])
+    const[corteSelecionado, alteraCorteSelecionado] = useState([])
+
+    const [dia, alteraDia] = useState([])
+    const [hora, alteraHora] = useState([])
 
     const [pesquisa, alteraPesquisa] = useState("")
 
@@ -26,6 +31,20 @@ function Agendamento() {
     async function buscaPorNome(nome){
         const response = await axios.get("http://localhost:3000/api/cortes/pesquisa/"+nome)
         alteraCortes(response.data)
+    }
+
+    async function insereHorario(){
+
+        const obj = {
+            dia: dia,
+            hora: hora
+        }
+
+        const response = await axios.post("https://localhost:3000/api/agendamento", obj)
+
+        alteraDia("")
+        alteraHora("")
+
     }
 
     function enviaFormulario(e){
@@ -43,23 +62,8 @@ function Agendamento() {
 
     return ( 
         <div>
-            {
-                agendamento == true &&
-                
-                    <div className="telaAgendamento">
-                        <input type="date"/>
-                        <input type="time"/>
-                        <div >                            
-                            <button className="agendamento" onClick={()=> {setVerCortes(false); setAgendamento(true)}}>Ver cortes</button>
-                        </div>
-                    </div>
-            }
             
-            
-            
-
-            {
-                verCortes == true &&
+            {   verCortes == true && verHorario == false ?
                 <div className="centralizar">
 
                     <form onSubmit={(e)=> enviaFormulario(e)}>
@@ -74,7 +78,7 @@ function Agendamento() {
                                 {
                                     cortes.map(i =>
                                         <div>                              
-                                            <Corte image={i.imagem} nome={i.nome} preco={i.preco}/>                                             
+                                            <Corte image={i.imagem} nome={i.nome} preco={i.preco} alteraVerHorario={alteraVerHorario} alteraCorteSelecionado={alteraCorteSelecionado} id={i.id} />                                             
                                         </div>                          
                                     )
                                 }
@@ -82,8 +86,18 @@ function Agendamento() {
                     }
                     
                 </div>
-
+            :
+                <div className="telaAgendamento">
+                    <form onSubmit={(e)=> enviaFormulario(e)}>
+                        {console.log(corteSelecionado)}
+                        <p className="textoBranco">Agende seu horário</p>
+                        <input type="date" onChange={(e)=> alteraDia(e.target.value)}/>
+                        <input type="time" onChange={(e)=> alteraHora(e.target.value)}/>
+                        <button>Salvar</button>
+                    </form>
+                </div>
             }
+            
 
 
         </div>
