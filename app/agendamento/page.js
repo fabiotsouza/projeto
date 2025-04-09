@@ -12,9 +12,14 @@ import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 function Agendamento() {
 
-    const[agendamento, setAgendamento] = useState(false)
+    const [verHorario, alteraVerHorario] = useState(false);
     const[verCortes, setVerCortes] = useState(true)   
+
     const[cortes, alteraCortes] = useState([])
+    const[corteSelecionado, alteraCorteSelecionado] = useState([])
+
+    const [dia, alteraDia] = useState([])
+    const [hora, alteraHora] = useState([])
 
     const [pesquisa, alteraPesquisa] = useState("")
 
@@ -24,46 +29,75 @@ function Agendamento() {
     }
 
     async function buscaPorNome(nome){
-        const response = await axios.get("http://localhost:3000/api/cortes")
+        const response = await axios.get("http://localhost:3000/api/cortes/pesquisa/"+nome)
         alteraCortes(response.data)
+    }
+
+    async function insereHorario(){
+
+        const obj = {
+            dia: dia,
+            hora: hora
+        }
+
+        const response = await axios.post("https://localhost:3000/api/agendamento", obj)
+
+        alteraDia("")
+        alteraHora("")
+
+    }
+
+    function enviaFormulario(e){
+
+        e.preventDefault()
+
+        if( pesquisa !== i.nome && pesquisa !== ("")){
+            <p>Corte não encontrado</p>
+        }
     }
 
     useEffect(()=> {
         buscaTodos()
-    }, [])
+    }, [pesquisa])
 
     return ( 
         <div>
-            {
-                agendamento == true &&
-                
-                    <div className="telaAgendamento">
-                        <input type="date"/>
-                        <input type="time"/>
-                        <div >                            
-                            <button className="agendamento" onClick={()=> {setVerCortes(false); setAgendamento(true)}}>Ver cortes</button>
-                        </div>
-                    </div>
-            }
             
-            
-            
-
-            {
-                verCortes == true &&
+            {   verCortes == true && verHorario == false ?
                 <div className="centralizar">
-                    <input type="search" placeholder="Pesquisar" onChange={(e)=> alteraPesquisa(e.target.value)}/>
-                    <button className="pesquisa" onClick={()=> buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                    <div>
-                        <Corte image="https://pm1.narvii.com/6532/3b861844e83e90e04b4e7a08a06694bdde4216c8_hq.jpg" nome="Corte do Zeca" preco="15"/>
-                        <Corte image="https://www.lance.com.br/files/article_main/uploads/2018/11/15/5bedcf90501e4.jpeg" nome="Corte do Fenômeno" preco="15"/>
-                        <Corte image="https://aventurasnahistoria.com.br/media/uploads/880px-kim_jong-un_at_the_workers_party_of_korea_main_building.png" nome="Corte Coreano" preco="15"/>
-                        <Corte image="https://pbs.twimg.com/media/ElxG8rEWMAAys3w.png" nome="Corte do Loro" preco="25"/>
-                        <Corte image="https://i.pinimg.com/originals/d5/7c/cd/d57ccd3e3572827d198bac41835899cb.jpg" nome="Corte do Masqueico" preco="20"/>
-                    </div>
-                </div>
 
+                    <form onSubmit={(e)=> enviaFormulario(e)}>
+                        <input type="search" placeholder="Pesquisar" onChange={(e)=> alteraPesquisa(e.target.value)}/>
+                        <button className="pesquisa" onClick={()=> buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                    </form>
+
+                    {
+                        cortes.length == 0 ? <p>Corte não encontrado</p>
+                        :
+                            <div>
+                                {
+                                    cortes.map(i =>
+                                        <div>                              
+                                            <Corte image={i.imagem} nome={i.nome} preco={i.preco} alteraVerHorario={alteraVerHorario} alteraCorteSelecionado={alteraCorteSelecionado} id={i.id} />                                             
+                                        </div>                          
+                                    )
+                                }
+                            </div>
+                    }
+                    
+                </div>
+            :
+                <div className="telaAgendamento">
+                    <form onSubmit={(e)=> enviaFormulario(e)}>
+                        {console.log(corteSelecionado)}
+                        <p className="textoBranco">Agende seu horário</p>
+                        <input type="date" onChange={(e)=> alteraDia(e.target.value)}/>
+                        <input type="time" onChange={(e)=> alteraHora(e.target.value)}/>
+                        <button>Salvar</button>
+                    </form>
+                </div>
             }
+            
 
 
         </div>
