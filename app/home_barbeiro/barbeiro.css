@@ -20,11 +20,14 @@ body{
     margin-bottom: 0px;
 }
 
-.calendar{
+.calendarBack{
     background-color: aliceblue;
     height: 650px;
     width: 650px;
     margin-top: 50px;
+    border-radius: 50px;
+    justify-items: center;
+    padding-top: 30px;
 
 } 
 
@@ -56,12 +59,42 @@ body{
     
 }
 .scheduledItem h3{
-    font-size: 30px;
+    font-size: 25px;
 }
 .scheduledItem p{
     font-size: 20px;
 }
 .color{
     font-size: 10px;
-    color: darkgrey;
+    color: rgb(100, 100, 100);
+}
+
+
+/*--------------------------------------*/
+.modern-calendar {
+    --calendar-bg: #151515;
+    --calendar-header: #1e1e1e;
+    --calendar-text: #ffffff;
+    --calendar-text-muted: #666666;
+    --calendar-accent: #ff3e3e;
+    --calendar-hover: rgba(255, 62, 62, 0.15);
+    --calendar-today: #2a2a2a;
+    --calendar-outside: #333333;
+  }
+
+table{
+
+}
+tr{
+    
+}
+th{
+  
+}
+td{
+
+    
+}
+table.button{
+
 }
