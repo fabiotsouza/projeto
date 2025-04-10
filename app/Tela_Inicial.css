@@ -75,6 +75,7 @@ label {
     margin-bottom: 5px;
 }
 
+input[type="name"],
 input[type="email"],
 input[type="password"] {
     width: 100%;
@@ -143,4 +144,13 @@ footer li {
     justify-content: center;
     width: -20px;
     height: -105px;
+}
+
+.alinhaTexto{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.textoBranco{
+    color: white;
 }

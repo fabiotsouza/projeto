@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import "../agendamento.css"
 
 function Cortes(attr) {
 
@@ -13,7 +14,7 @@ function Cortes(attr) {
     return ( 
 
         <div>
-            <div className="imagemCorte">
+            <div className="imagemCorte fundoCard" >
                 <img className="tamanhoImagem" src={attr.image} />
                 <div className="centralizarCorte">
                     <p className="nomeCorte">{attr.nome}</p>                    
@@ -23,7 +24,7 @@ function Cortes(attr) {
                 </div>
                 <div>
                     <br/><br/>
-                    <button className="agendar" onClick={()=> agendar() }>Agendar</button>                   
+                    <button className="agendar fundoSalvar" onClick={()=> agendar() }>Agendar</button>                   
                 </div>
             </div>
         </div>
