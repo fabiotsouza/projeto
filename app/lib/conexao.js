@@ -2,10 +2,10 @@ import mysql from "mysql2/promise";
 
 const conexao = await mysql.createConnection(
     {
-        host: "localhost",
+        host: "10.60.46.38",
         user: "root",
         password: "",
-        database: "projeto"
+        database: "projeto_novo"
     }
 )
 
