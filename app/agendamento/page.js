@@ -1,12 +1,13 @@
 'use client'
 
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./agendamento.css"
 import Corte from"./components/Corte.js"
+import Menu from "../components/Menu.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
-
 
 
 
@@ -33,7 +34,9 @@ function Agendamento() {
         alteraCortes(response.data)
     }
 
-    async function insereHorario(){
+    async function insereHorario(e){
+
+        e.preventDefault()
 
         const obj = {
             dia: dia,
@@ -42,12 +45,14 @@ function Agendamento() {
 
         const response = await axios.post("https://localhost:3000/api/agendamento", obj)
 
+
         alteraDia("")
         alteraHora("")
 
     }
 
-    function enviaFormulario(e){
+
+    function enviaPesquisa(e){
 
         e.preventDefault()
 
@@ -62,11 +67,11 @@ function Agendamento() {
 
     return ( 
         <div>
-            
+            <Menu/>
             {   verCortes == true && verHorario == false ?
                 <div className="centralizar">
-
-                    <form onSubmit={(e)=> enviaFormulario(e)}>
+                    
+                    <form onSubmit={(e)=> enviaPesquisa(e)}>
                         <input type="search" placeholder="Pesquisar" onChange={(e)=> alteraPesquisa(e.target.value)}/>
                         <button className="pesquisa" onClick={()=> buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                     </form>
@@ -88,11 +93,11 @@ function Agendamento() {
                 </div>
             :
                 <div className="telaAgendamento">
-                    <form onSubmit={(e)=> enviaFormulario(e)}>
+                    <form onSubmit={(e)=> insereHorario(e)}>
                         {console.log(corteSelecionado)}
                         <p className="textoBranco">Agende seu horário</p>
-                        <input type="date" onChange={(e)=> alteraDia(e.target.value)}/>
-                        <input type="time" onChange={(e)=> alteraHora(e.target.value)}/>
+                        <input type="date" required onChange={(e)=> alteraDia(e.target.value)}/>
+                        <input type="time" required onChange={(e)=> alteraHora(e.target.value)}/>
                         <button>Salvar</button>
                     </form>
                 </div>

@@ -1,4 +1,3 @@
-import { headers } from "next/headers"
 import conexao from "@/app/lib/conexao"
 
 export async function GET(){
@@ -17,4 +16,3 @@ export async function GET(){
     )
 
 }
-
