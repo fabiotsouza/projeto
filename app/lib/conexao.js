@@ -5,7 +5,7 @@ const conexao = await mysql.createConnection(
         host: "localhost",
         user: "root",
         password: "",
-        database: "barbearia"
+        database: "projeto"
     }
 )
 
