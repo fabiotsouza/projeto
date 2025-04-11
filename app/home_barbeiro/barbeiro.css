@@ -1,18 +1,22 @@
-body{
+body {
     background-color: #494850;
 }
-.title{
+
+.title {
     margin: 20px 50px;
 }
-.title h1{
+
+.title h1 {
     font-size: 35px;
     color: aliceblue;
 }
-.title h2{
+
+.title h2 {
     font-size: 25px;
     color: silver;
 }
-.screen{
+
+.screen {
     display: flex;
     justify-content: space-evenly;
     margin-left: 50px;
@@ -20,29 +24,30 @@ body{
     margin-bottom: 0px;
 }
 
-.calendarBack{
+.calendarBack {
     background-color: aliceblue;
     height: 650px;
     width: 650px;
     margin-top: 50px;
     border-radius: 50px;
     justify-items: center;
-    padding-top: 30px;
+    padding-top: 50px;
 
-} 
+}
 
-.back{
+.back {
     background-color: #2c2c34;
     padding: 5px;
     border-radius: 20px;
 }
-.listScheduled h2{
+
+.listScheduled h2 {
     font-size: 30px;
     text-align: center;
     color: aliceblue;
 }
 
-.listScheduled ul{
+.listScheduled ul {
     overflow-y: scroll;
     overflow-x: none;
     max-height: 665px;
@@ -50,51 +55,60 @@ body{
     scrollbar-width: thin;
 
 }
-.scheduledItem{
+
+.scheduledItem {
     margin: 15px;
     padding: 40px 80px;
     background-color: aliceblue;
     border-radius: 25px;
     width: 500px;
-    
+
 }
-.scheduledItem h3{
+
+.scheduledItem h3 {
     font-size: 25px;
 }
-.scheduledItem p{
+
+.scheduledItem p {
     font-size: 20px;
 }
-.color{
+
+.color {
     font-size: 10px;
     color: rgb(100, 100, 100);
 }
 
 
 /*--------------------------------------*/
-.modern-calendar {
-    --calendar-bg: #151515;
-    --calendar-header: #1e1e1e;
-    --calendar-text: #ffffff;
-    --calendar-text-muted: #666666;
-    --calendar-accent: #ff3e3e;
-    --calendar-hover: rgba(255, 62, 62, 0.15);
-    --calendar-today: #2a2a2a;
-    --calendar-outside: #333333;
-  }
+.custom-calendar {
+    background-color: aliceblue;
+    border: 1px solid #ccc;
+    font-size: 50px;
+    size: 200px;
+}
 
-table{
 
+.custom-cell {
+    color: #333;
+    padding: 10px;
+    font-size: 25px;
 }
-tr{
-    
-}
-th{
-  
-}
-td{
 
-    
-}
-table.button{
+.custom-header {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
 
 }
+.custom-button{
+    color: #007bff;
+}
+
+
+
+.custom-title{
+    justify-content: flex;
+    flex-direction: row
+}
+
+

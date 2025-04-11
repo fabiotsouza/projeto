@@ -21,7 +21,7 @@ function HomeBarbeiro() {
         setAppointments(response.data)
     }
     async function searchDay(dia) {
-        const data = dia.year+"-"+dia.month+"-"+dia.day
+        const data = dia.year + "-" + dia.month + "-" + dia.day
         console.log(data)
         const response = await axios.get("http://localhost:3000/api/agendamentos/" + data)
         setSelectDay(response.data)
@@ -39,10 +39,16 @@ function HomeBarbeiro() {
                     <h2>O que vai ser hoje?</h2>
                 </div>
                 <div className="screen">
-                    <div className="calendarBack">
-                        <Calendar aria-label="Date (International Calendar)" defaultValue={today(getLocalTimeZone())} onChange={searchDay}       className="modern-calendar"
-                        />
-                    </div>
+                    <Calendar aria-label="Date (International Calendar)" defaultValue={today(getLocalTimeZone())} onChange={searchDay} calendarWidth={1000} classNames={{
+                        base: 'custom-calendar',
+                        cell: 'custom-cell',
+                        header: 'custom-header',
+                        nextButton: 'custom-button',
+                        headerWrapper: 'custom-headerW',
+                        title: 'custom-title'
+                    }}
+                    />
+
                     <div className="back">
                         <div className="listScheduled">
                             <h2>Agendados</h2>
