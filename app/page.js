@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import './Tela_Inicial.css'; // Importando o CSS
 import axios from 'axios';
+import { Router } from 'next/router';
+import Menu from "./components/Menu.js"
 
 function Inicio() {
 
@@ -11,10 +13,15 @@ function Inicio() {
 
     async function login(e){
 
-        
+        e.preventDefault()
 
-        const response = await axios.post("http://localhost:3000/api/login/autenticar")
+        const response = await axios.post("http://localhost:3000/api/login/autenticar", {email, senha})
 
+        if (response.status == 200) {
+            window.location.href= "./home_cliente"
+        }else{
+            message("Email, ou senha inválidos")
+        }
     }
 
     async function cadastro(e){
@@ -36,7 +43,7 @@ function Inicio() {
             alteraNome("")
             alteraEmail("")
             alteraSenha("")
-            window.location.href= "./agendamento"
+            window.location.href= "/"
         }
 
     }
@@ -47,7 +54,7 @@ function Inicio() {
 
     return (
         <div>
-            
+            <Menu/>
             <section id="hero">
                 <img
                     className="grad"
@@ -63,9 +70,9 @@ function Inicio() {
                 <h3>Login</h3>
                 <form onSubmit={(e)=> login(e)}>
                     <label htmlFor="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required />
+                    <input type="email" id="email" name="email" onChange={(e)=> alteraEmail(e.target.value)} required />
                     <label htmlFor="password">Senha:</label>
-                    <input type="password" id="password" name="password" required />
+                    <input type="password" id="password" name="password" onChange={(e)=> alteraSenha(e.target.value)} required />
                     <button type="submit">Entrar</button>
                 </form>
             </section>
@@ -84,7 +91,7 @@ function Inicio() {
             </div>
 
             <div id="entrar" className='alinhaTexto'>
-                <a href="./agendamento" className="btn">Navegar sem Logar</a>
+                <a href="./home_cliente" className="btn">Navegar sem Logar</a>
             </div>
 
             <footer>

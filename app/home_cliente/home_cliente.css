@@ -1,0 +1,33 @@
+body{
+    background-color: #494850;
+    color: #f0f8ff;
+}
+
+.ladoEsquerdo{
+    text-align: start;
+    margin: 60px;
+    
+}
+
+.icone{
+    padding: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+}
+
+.ladoDireito{
+    
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card{
+    background-color: #f0f8ff;
+    padding: 40px;
+    padding-left: 100px;
+}
+
