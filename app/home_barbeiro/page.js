@@ -5,6 +5,7 @@ import "./barbeiro.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Calendar } from "@heroui/calendar";
+import { CalendarDate } from '@internationalized/date';
 import { today, getLocalTimeZone } from "@internationalized/date";
 
 
@@ -13,6 +14,17 @@ function HomeBarbeiro() {
 
     const [appointments, setAppointments] = useState([])
     const [selectDay, setSelectDay] = useState("")
+    const hoje = new Date(today(getLocalTimeZone()));
+    // Primeiro dia do mês atual
+
+    const primeiroDiaMes = new CalendarDate(hoje.getFullYear(), hoje.getMonth() + 1, 1);
+
+
+
+    // Último dia do mês atual
+
+    const ultimoDiaMes = new CalendarDate(hoje.getFullYear(), hoje.getMonth() + 1, new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate());
+
 
 
     async function searchAll() {
@@ -30,6 +42,7 @@ function HomeBarbeiro() {
         searchAll()
     }, [])
 
+
     return (
         <div>
             <Menu />
@@ -39,15 +52,23 @@ function HomeBarbeiro() {
                     <h2>O que vai ser hoje?</h2>
                 </div>
                 <div className="screen">
-                    <Calendar aria-label="Date (International Calendar)" defaultValue={today(getLocalTimeZone())} onChange={searchDay} calendarWidth={1000} classNames={{
-                        base: 'custom-calendar',
-                        cell: 'custom-cell',
-                        header: 'custom-header',
-                        nextButton: 'custom-button',
-                        headerWrapper: 'custom-headerW',
-                        title: 'custom-title'
-                    }}
+                    <Calendar aria-label="Date (International Calendar)"
+                        defaultValue={today(getLocalTimeZone())}
+                        onChange={searchDay}
+                        minValue={primeiroDiaMes}
+                        maxValue={ultimoDiaMes}
+                        classNames={{
+                            base: 'custom-calendar',
+                            cell: 'custom-cell',
+
+                            header: 'custom-header',
+                            nextButton: 'custom-button',
+                            prevButton: 'custom-button',
+                            headerWrapper: 'custom-headerW',
+                            title: 'custom-title'
+                        }}
                     />
+                    
 
                     <div className="back">
                         <div className="listScheduled">
