@@ -4,6 +4,7 @@ import './Tela_Inicial.css'; // Importando o CSS
 import axios from 'axios';
 import { Router } from 'next/router';
 import Menu from "./components/Menu.js"
+import host from './lib/host';
 
 function Inicio() {
 
@@ -15,7 +16,7 @@ function Inicio() {
 
         e.preventDefault()
 
-        const response = await axios.post("http://localhost:3000/api/login/autenticar", {email, senha})
+        const response = await axios.post(host+"login/autenticar", {email, senha})
 
         if (response.status == 200) {
             window.location.href= "./home_cliente"
@@ -36,7 +37,7 @@ function Inicio() {
 
         console.log(obj)
 
-        const response = await axios.post("http://localhost:3000/api/cadastro", obj)
+        const response = await axios.post(host+"cadastro", obj)
         console.log(response)
         if(response.status == 200){
             console.log("Arrombado cadastrado com sucesso!")

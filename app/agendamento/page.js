@@ -8,6 +8,7 @@ import Corte from"./components/Corte.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from "../components/Menu_cliente";
+import host from "../lib/host";
 
 
 
@@ -25,12 +26,12 @@ function Agendamento() {
     const [pesquisa, alteraPesquisa] = useState("")
 
     async function buscaTodos(){
-        const response = await  axios.get("http://localhost:3000/api/cortes")
+        const response = await  axios.get(host+"cortes")
         alteraCortes(response.data)
     }
 
     async function buscaPorNome(nome){
-        const response = await axios.get("http://localhost:3000/api/cortes/pesquisa/"+nome)
+        const response = await axios.get(host+"cortes/pesquisa/"+nome)
         alteraCortes(response.data)
     }
 
@@ -43,7 +44,7 @@ function Agendamento() {
             hora: hora
         }
 
-        const response = await axios.post("https://localhost:3000/api/agendamento", obj)
+        const response = await axios.post(host+"agendamento", obj)
 
 
         alteraDia("")
