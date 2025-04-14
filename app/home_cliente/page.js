@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCalendarDays, faScissors } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from '../components/Menu_cliente';
+import host from '../lib/host';
 
 
 function Home_cliente() {
@@ -13,12 +14,12 @@ function Home_cliente() {
     const[populares, alteraPopulares] = useState([])
 
     async function buscaHistorico(id){
-        const response = await axios.get("http://localhost:3000/api/historico")
+        const response = await axios.get(host+"historico")
         alteraHistorico(response.data)
     }
 
     async function buscaPopulares(){
-        const response = await axios.get("http://localhost:3000/api/populares")
+        const response = await axios.get(host+"populares")
         alteraPopulares(response.data)
     }
 
