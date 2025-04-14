@@ -5,9 +5,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./agendamento.css"
 import Corte from"./components/Corte.js"
-import Menu from "../components/Menu.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import Menu_cliente from "../components/Menu_cliente";
 
 
 
@@ -67,7 +67,7 @@ function Agendamento() {
 
     return ( 
         <div>
-            <Menu/>
+            <Menu_cliente/>
             {   verCortes == true && verHorario == false ?
                 <div className="centralizar">
                     
