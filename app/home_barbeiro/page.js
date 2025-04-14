@@ -14,28 +14,17 @@ function HomeBarbeiro() {
 
     const [appointments, setAppointments] = useState([])
     const [selectDay, setSelectDay] = useState("")
-    const hoje = new Date(today(getLocalTimeZone()));
-    // Primeiro dia do mês atual
-
-    const primeiroDiaMes = new CalendarDate(hoje.getFullYear(), hoje.getMonth() + 1, 1);
-
-
-
-    // Último dia do mês atual
-
-    const ultimoDiaMes = new CalendarDate(hoje.getFullYear(), hoje.getMonth() + 1, new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate());
-
 
 
     async function searchAll() {
-        const response = await axios.get("http://localhost:3000/api/agendamentos")
+        const response = await axios.get(host+"agendamentos")
         console.log(response.data)
         setAppointments(response.data)
     }
     async function searchDay(dia) {
         const data = dia.year + "-" + dia.month + "-" + dia.day
         console.log(data)
-        const response = await axios.get("http://localhost:3000/api/agendamentos/" + data)
+        const response = await axios.get(host+"/agendamentos/" + data)
         setSelectDay(response.data)
     }
     useEffect(() => {
@@ -55,12 +44,10 @@ function HomeBarbeiro() {
                     <Calendar aria-label="Date (International Calendar)"
                         defaultValue={today(getLocalTimeZone())}
                         onChange={searchDay}
-                        minValue={primeiroDiaMes}
-                        maxValue={ultimoDiaMes}
+
                         classNames={{
                             base: 'custom-calendar',
                             cell: 'custom-cell',
-
                             header: 'custom-header',
                             nextButton: 'custom-button',
                             prevButton: 'custom-button',
