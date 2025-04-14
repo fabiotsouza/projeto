@@ -3,23 +3,6 @@ body{
     color: #f0f8ff;
 }
 
-.ladoEsquerdo{
-    text-align: start;
-    margin: 60px;
-    
-}
-
-.icone{
-    padding: 30px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    
-}
-
-.ladoDireito{
-    
-}
-
 .flex{
     display: flex;
     justify-content: space-between;
@@ -31,3 +14,24 @@ body{
     padding-left: 100px;
 }
 
+.iconeimg{
+    font-size: 45px;
+    padding: 35px;
+    background-color: #f0f8ff ;
+}
+
+
+.icone{
+    border-radius: 8px;
+    margin-left: 100px;
+}
+
+.espaco{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.espacoCard{
+    position: absolute;
+    display: flex;
+}
