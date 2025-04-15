@@ -3,35 +3,35 @@ body{
     color: #f0f8ff;
 }
 
-.flex{
+.icones{
     display: flex;
+    justify-content: center;
     justify-content: space-between;
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
 }
 
-.card{
-    background-color: #f0f8ff;
+.icones button{
     padding: 40px;
-    padding-left: 100px;
+    font-size: 50px;
+    border-radius: 20px;
 }
 
-.iconeimg{
-    font-size: 45px;
-    padding: 35px;
-    background-color: #f0f8ff ;
+hr{
+    margin-left: 40px;
+    margin-right: 40px;
+    border: none;
+    border-top: 2px solid #0094c6;
 }
 
-
-.icone{
-    border-radius: 8px;
+.feed{
+    margin-top: 50px;
+    margin-bottom: 50px;
     margin-left: 100px;
+    font-size: 20px;
 }
-
-.espaco{
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.espacoCard{
-    position: absolute;
+.feedInside{
     display: flex;
+    flex-direction: row;
 }

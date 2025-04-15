@@ -14,15 +14,20 @@ function Inicio() {
 
     async function login(e){
 
-        e.preventDefault()
+        e.preventDefault();
 
-        const response = await axios.post(host+"login/autenticar", {email, senha})
+        const response = await axios.post(host+"login/autenticar")
 
-        if (response.status == 200) {
-            window.location.href= "./home_cliente"
-        }else{
-            message("Email, ou senha inválidos")
+        if (response.length == 0){
+            alert("Email, ou senha inválidos")
+            return
         }
+        
+        
+        const usuario = JSON.stringify(usuario)
+        localStorage.setItem("usuario", usuario)
+        window.location.href = '/agendamento'
+
     }
 
     async function cadastro(e){
@@ -38,15 +43,16 @@ function Inicio() {
         console.log(obj)
 
         const response = await axios.post(host+"cadastro", obj)
-        console.log(response)
         if(response.status == 200){
-            console.log("Arrombado cadastrado com sucesso!")
             alteraNome("")
             alteraEmail("")
             alteraSenha("")
             window.location.href= "/"
+        }else if(response.status == 401){
+            alteraNome("")
+            alteraEmail("")
+            alteraSenha("")
         }
-
     }
 
     useEffect(()=> {

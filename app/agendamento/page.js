@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import "./agendamento.css"
 import Corte from"./components/Corte.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from "../components/Menu_cliente";
 import host from "../lib/host";
 
