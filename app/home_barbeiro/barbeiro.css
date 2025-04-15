@@ -87,18 +87,20 @@ body {
     border-radius: 50px;
     padding: 20px;
 
+
 }
 
 
 
-.custom-cell{
-    cursor: pointer;
+.custom-cell {
+
     color: aliceblue;
-    padding: 20px;
     border-radius: 20px;
     text-align: center;
     font-size: 25px;
-    background-color:#494850;
+    background-color: #494850;
+    padding: 20px;
+
 }
 
 .custom-header {
@@ -108,29 +110,35 @@ body {
     border-radius: 50px;
     padding: 10px;
     text-align: center;
-
+    font-size: 30px;
 }
-.custom-button{
+
+.custom-button {
     color: aliceblue;
     background-color: #494850;
     border: none;
     border-radius: 40px;
     padding: 15px;
+    cursor: pointer;
 }
-.custom-cell[data-outside-month] {
 
-    color: #ccc; /* Cor cinza para datas fora do mês */
+.c-c{
+    cursor: pointer; 
 
-    pointer-events: none; /* Opcional: impede hover/click */
+}
 
-  }
-
-
-
-.custom-title{
-    justify-content: flex;
-    flex-direction: row
+.aria-disabled{
+    background-color: white;
 }
 
 
 
+.custom-headerW{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    flex-direction: row;
+    background-color: aliceblue;
+    border-radius: 50px;
+}

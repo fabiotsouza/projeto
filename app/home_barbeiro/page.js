@@ -5,7 +5,6 @@ import "./barbeiro.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Calendar } from "@heroui/calendar";
-import { CalendarDate } from '@internationalized/date';
 import { today, getLocalTimeZone } from "@internationalized/date";
 import host from "../lib/host.js";
 
@@ -46,14 +45,19 @@ function HomeBarbeiro() {
                         defaultValue={today(getLocalTimeZone())}
                         onChange={searchDay}
 
+                        pageBehavior="single"
+                        color="primary" // Added color prop to change selected cell color
+
                         classNames={{
                             base: 'custom-calendar',
                             cell: 'custom-cell',
+                            cellButton: 'c-c',
                             header: 'custom-header',
                             nextButton: 'custom-button',
                             prevButton: 'custom-button',
                             headerWrapper: 'custom-headerW',
                             title: 'custom-title'
+                            
                         }}
                     />
                     
