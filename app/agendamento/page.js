@@ -21,6 +21,7 @@ function Agendamento() {
     const [cortes, alteraCortes] = useState([])
     const [corteSelecionado, alteraCorteSelecionado] = useState([])
 
+    const [selectDay, setSelectDay] = useState([])
     const [dia, alteraDia] = useState([])
     const [hora, alteraHora] = useState([])
 
@@ -58,7 +59,7 @@ function Agendamento() {
 
         e.preventDefault()
 
-        if (pesquisa !== i.nome && pesquisa !== ("")) {
+        if (pesquisa == null  && pesquisa !== ("")) {
             <p>Corte não encontrado</p>
         }
     }
@@ -67,7 +68,7 @@ function Agendamento() {
         const data = dia.year + "-" + dia.month + "-" + dia.day
         console.log(data)
         
-        const response = await axios.get(host + "/agendamentos/" + data)
+        const response = await axios.get(host + "agendamentos/" + data)
         console.log(response)
 
         if( response.data == 0){

@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCalendarDays, faScissors } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from '../components/Menu_cliente';
 import host from '../lib/host';
-import Agendamento from '../agendamento/page';
 import Card from '../components/Card';
 
 
@@ -24,7 +23,7 @@ function Home_cliente() {
     }
 
     async function buscaHistorico(id){
-        const response = await axios.get(host+"historico")
+        const response = await axios.get(host+"historico/"+id)
         alteraHistorico(response.data)
     }
 
@@ -34,7 +33,12 @@ function Home_cliente() {
     }
 
     useEffect(()=> {
+
+        const usuarioLocal = localStorage.getItem("usuario")
+
         buscaTodos()
+        buscaHistorico(JSON.parse(usuarioLocal).id)
+        buscaPopulares()
     }, [])
 
     return ( 
@@ -65,7 +69,7 @@ function Home_cliente() {
                 <p>Histórico</p>
                 <div>
                     {
-                        cortes.map(i=>
+                        historico.map(i=>
                             <div>
                                 <Card nome={i.nome} preco={i.preco} id={i.id}/>                          
                             </div>
@@ -78,7 +82,7 @@ function Home_cliente() {
                 <p>Populares</p>
                 <div>
                     {
-                        cortes.map(i=>
+                        populares.map(i=>
                             <div>
                                 <Card nome={i.nome} preco={i.preco} id={i.id}/>
                             </div>
