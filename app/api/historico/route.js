@@ -4,7 +4,7 @@ export async function GET(request, {params}){
 
     const id = (await params).id
     const query = `
-        SELECT * FROM cortes WHERE id = ${id};
+        SELECT * FROM cortes JOIN usuarios ON cortes.id = usuarios.id WHERE usuarios.id = ${id};
     `
     const [results] = await conexao.execute(query)
 

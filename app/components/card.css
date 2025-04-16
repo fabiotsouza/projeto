@@ -1,0 +1,11 @@
+.card{
+    width: 300px;
+    height: 200px;
+    border-radius: 12px;
+    padding: 20px;
+    color: #000;
+    background-image: url('https://i0.wp.com/thumbs.dreamstime.com/z/o-corte-de-cabelo-elegante-e-barba-dos-homens-desenhos-animados-elemento-do-moderno-da-cabe-cara-m%C3%A3o-preto-branco-indiv%C3%ADduo-145103772.jpg?strip=all');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
