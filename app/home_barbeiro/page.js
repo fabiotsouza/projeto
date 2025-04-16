@@ -29,7 +29,7 @@ function HomeBarbeiro() {
         console.log(response)
 
         if( response.data == 0){
-            console.log("Nao tme nada nesse dia")
+            console.log("Nao tem nada nesse dia")
             setSelectDay("vazio")
         }else{
             setSelectDay(response.data)
@@ -49,7 +49,8 @@ function HomeBarbeiro() {
                     <h2>O que vai ser hoje?</h2>
                 </div>
                 <div className="screen">
-                    <button onClick={()=>searchAll()} >Ver tudo</button>
+                    <div className="center">
+
                     <Calendar aria-label="Date (International Calendar)"
                         defaultValue={today(getLocalTimeZone())}
                         onChange={searchDay}
@@ -69,6 +70,8 @@ function HomeBarbeiro() {
 
                         }}
                     />
+                    <button onClick={()=>searchAll() } className="verTudo"><strong>Ver tudo</strong></button>
+                    </div>
 
 
                     <div className="back">
