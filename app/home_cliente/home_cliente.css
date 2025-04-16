@@ -36,3 +36,7 @@ hr{
     display: flex;
     flex-direction: row;
 }
+
+button{
+    cursor: pointer;
+}

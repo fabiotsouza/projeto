@@ -2,9 +2,9 @@ import conexao from "@/app/lib/conexao"
 
 export async function GET(request, {params}){
 
-    const nome = (await params).nome
+    const id = (await params).id
     const query = `
-        SELECT * FROM cortes JOIN usuarios, agendamentos ON agendamentos.id = usuarios.id WHERE usuarios.nome = ${nome};
+        SELECT * FROM cortes JOIN usuarios, agendamentos ON agendamentos.id = usuarios.id WHERE usuarios.id = ${id};
     `
     const [results] = await conexao.execute(query)
 
