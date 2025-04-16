@@ -78,6 +78,25 @@ body {
     color: rgb(100, 100, 100);
 }
 
+.verTudo{
+    font-size: 25px;
+    background: aliceblue;
+    border-radius: 30px;
+    color: #2c2c34;
+    padding: 15px;
+    border: none;
+    text-align: center;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
 
 /*--------------------------------------*/
 .custom-calendar {
