@@ -16,3 +16,18 @@ export async function GET(){
     )
 
 }
+export async function POST(request) {
+    const body = await request.json()
+    const query =`
+    INSERT INTO cortes
+    (nome, preco, imagem)
+    VALUES
+    (?, ?, ?);`
+    const[results] = await conexao.execute(
+        query,
+        [body.name, body.price, body.image]
+    )
+    return new Response(JSON.stringify(results.insertId))
+}
+
+
