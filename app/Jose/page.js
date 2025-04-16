@@ -1,7 +1,9 @@
 'use client'
-
+import "../components/Menu.js"
+import Menu from "../components/Menu";
 import { useState, useEffect } from "react";
 import "./projeto1.css";
+
 
 
 
@@ -69,7 +71,7 @@ function Pagina_jose() {
 
   return (
 
-    
+
 
 
 
@@ -77,18 +79,9 @@ function Pagina_jose() {
     <div>
 
 
-       
 
 
-      <div className="logo">
-        <button><i className="fa-solid fa-list"></i> Menu</button>
-        <img
-          src="https://img.freepik.com/vetores-premium/belos-cachos-de-cabelo-e-pente-de-tesoura_261524-3013.jpg?semt=ais_hybrid"
-          alt="Logo da Empresa"
-          className="logo-img"
-        />
-        <a href="https://gaming.amazon.com/home" target="_blank" className="logo-link">Instagram</a>
-      </div>
+      <Menu />
 
 
 
@@ -225,7 +218,7 @@ function Pagina_jose() {
 
                 {/* Botão Apagar */}
                 <td className="corte">
-                  <button onClick={() => apagarLinha(index)}>Apagar Linha</button>
+                  <button onClick={() => apagarLinha(index)}>Apagar Corte</button>
                 </td>
               </tr>
             ))}
