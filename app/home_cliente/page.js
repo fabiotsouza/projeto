@@ -63,12 +63,28 @@ function Home_cliente() {
             <hr/>
             <div className='feed'>
                 <p>Histórico</p>
-                <Card/>
+                <div>
+                    {
+                        cortes.map(i=>
+                            <div>
+                                <Card nome={i.nome} preco={i.preco} id={i.id}/>                          
+                            </div>
+                        )
+                    }
+                </div>
             </div>
 
             <div className='feed'>
                 <p>Populares</p>
-                <Card/>
+                <div>
+                    {
+                        cortes.map(i=>
+                            <div>
+                                <Card nome={i.nome} preco={i.preco} id={i.id}/>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
 
         </div>
