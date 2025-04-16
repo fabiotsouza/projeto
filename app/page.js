@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Router } from 'next/router';
 import Menu from "./components/Menu.js"
 import host from './lib/host';
+import Menu_cliente from './components/Menu_cliente';
 
 function Inicio() {
 
@@ -16,17 +17,23 @@ function Inicio() {
 
         e.preventDefault();
 
-        const response = await axios.post(host+"login/autenticar")
+        const obj = {
+            nome: nome,
+            email: email,
+            senha: senha
+        }
 
-        if (response.length == 0){
+        const response = await axios.post(host+"login/autenticar", obj)
+
+        if (response.data.length == 0){
             alert("Email, ou senha inválidos")
             return
         }
         
         
-        const usuario = JSON.stringify(usuario)
+        const usuario = JSON.stringify(obj)
         localStorage.setItem("usuario", usuario)
-        window.location.href = '/agendamento'
+        window.location.href = '/home_cliente'
 
     }
 
@@ -61,7 +68,7 @@ function Inicio() {
 
     return (
         <div>
-            <Menu/>
+            <Menu_cliente/>
             <section id="hero">
                 <img
                     className="grad"
