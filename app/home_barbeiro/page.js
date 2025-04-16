@@ -12,20 +12,28 @@ import host from "../lib/host.js";
 
 function HomeBarbeiro() {
 
-    const [appointments, setAppointments] = useState([])
-    const [selectDay, setSelectDay] = useState("")
+    //const [appointments, setAppointments] = useState([])
+    const [selectDay, setSelectDay] = useState([])
 
 
     async function searchAll() {
-        const response = await axios.get(host+"agendamentos")
+        const response = await axios.get(host + "agendamentos")
         console.log(response.data)
-        setAppointments(response.data)
+        setSelectDay(response.data)
     }
     async function searchDay(dia) {
         const data = dia.year + "-" + dia.month + "-" + dia.day
         console.log(data)
-        const response = await axios.get(host+"/agendamentos/" + data)
-        setSelectDay(response.data)
+        
+        const response = await axios.get(host + "/agendamentos/" + data)
+        console.log(response)
+
+        if( response.data == 0){
+            console.log("Nao tme nada nesse dia")
+            setSelectDay("vazio")
+        }else{
+            setSelectDay(response.data)
+        }
     }
     useEffect(() => {
         searchAll()
@@ -41,6 +49,7 @@ function HomeBarbeiro() {
                     <h2>O que vai ser hoje?</h2>
                 </div>
                 <div className="screen">
+                    <button onClick={()=>searchAll()} >Ver tudo</button>
                     <Calendar aria-label="Date (International Calendar)"
                         defaultValue={today(getLocalTimeZone())}
                         onChange={searchDay}
@@ -57,18 +66,17 @@ function HomeBarbeiro() {
                             prevButton: 'custom-button',
                             headerWrapper: 'custom-headerW',
                             title: 'custom-title'
-                            
+
                         }}
                     />
-                    
+
 
                     <div className="back">
                         <div className="listScheduled">
                             <h2>Agendados</h2>
                             <ul>
                                 {
-                                    selectDay != "" ?
-
+                                    typeof selectDay == "object" && selectDay.length > 0 &&
 
                                         selectDay.map(i =>
                                             <li className="scheduledItem">
@@ -76,21 +84,25 @@ function HomeBarbeiro() {
                                                 <p><strong>Hora agendada:</strong> {i.horario}</p>
                                                 <p className="color">{i.c_nome} - R${i.preco}</p>
                                             </li>
-
                                         )
+                                    
+                                }
 
-                                        :
+                                {
+                                    selectDay == "vazio" &&
 
+                                        <li className="scheduledItem">
+                                            <h3>Sem agendamentos para esse dia</h3>
+                                        </li>
 
-                                        appointments.map(i =>
-                                            <li className="scheduledItem">
-                                                <h3>{i.u_nome}</h3>
-                                                <p><strong>Hora agendada:</strong> {i.horario}</p>
-                                                <p className="color">{i.c_nome} - R${i.preco}</p>
-                                            </li>
+                                }
 
-                                        )
+                                {
+                                    selectDay == 0 &&
 
+                                        <li className="scheduledItem">
+                                            <h3>Carregando...</h3>
+                                        </li>
 
                                 }
 
