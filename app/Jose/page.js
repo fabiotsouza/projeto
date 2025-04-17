@@ -15,6 +15,8 @@ function Pagina_jose() {
   const [image, setImage] = useState("")
   const [price, setPrice] = useState("")
 
+  const [edit, setEdit] = useState(0)
+
   async function searchCuts() {
     const response = await axios.get(host + "cortes")
     console.log(response.data)
@@ -34,10 +36,46 @@ function Pagina_jose() {
     setPrice("")
     setImage("")
   }
+
+  async function updateCut() {
+    const obj = {
+      name: name,
+      price: price,
+      image: image
+    }
+    const response = await axios.put(host + "cortes/"+ edit, obj)
+    console.log(response)
+    setEdit(0)
+    searchCuts()
+    setName("")
+    setPrice("")
+    setImage("")
+  }
+  function createEdit(corte){
+    setEdit(corte.id)
+    setName(corte.nome)
+    setPrice(corte.preco)
+    setImage(corte.imagem)
+  }
+  async function deleteCut(id){
+    await axios.delete(host + "cortes/" + id)
+    searchCuts()
+  }
+  function cancel(){
+    setEdit(0)
+    setName("")
+    setPrice("")
+    setImage("")
+
+  }
+
   function sendForm(e) {
     e.preventDefault()
-    insertCut()
-
+    if (edit == 0) {
+      insertCut()
+    }else{
+      updateCut()
+    }
   }
   useEffect(() => {
     searchCuts()
@@ -53,8 +91,13 @@ function Pagina_jose() {
         <div className="formulario">
           <br />
 
+          {
+            edit == 0 ?
+            <h2>Adicionar novos cortes:</h2>
+            :
+            <h2>Edição:</h2>
 
-          <h2>Adicionar novos cortes:</h2>
+          }
 
 
 
@@ -74,10 +117,22 @@ function Pagina_jose() {
               </p>
               <input onChange={(e) => setImage(e.target.value)} value={image} />
               <br />
+              {
+                edit == 0 ?
+                <button >Adicionar corte</button>
+                :
+                <button>Editar</button>
 
-              <button >Adicionar corte</button>
+              }
 
             </form>
+            
+          {
+            edit != 0 &&
+
+            <button onClick={() => cancel()}>Cancelar</button>
+
+          }
           </div>
         </div>
         <div className="tabela">
@@ -100,9 +155,9 @@ function Pagina_jose() {
                       <td><img src={i.imagem} /></td>
 
                       <td className="botoes">
-                        <button >Editar</button>
+                        <button onClick={() => createEdit(i)}>Editar</button>
                         <br />
-                        <button >Remover</button>
+                        <button onClick={() => deleteCut(i.id)} >Remover</button>
                       </td>
                     </tr>
                   )

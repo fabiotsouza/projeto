@@ -3,7 +3,7 @@ import conexao from "@/app/lib/conexao"
 export async function GET(){
     
     const query = `
-        SELECT * FROM cortes;
+        SELECT * FROM cortes WHERE ativo = 1;
     `
     const [results] = await conexao.execute(query)
 

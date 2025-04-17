@@ -4,7 +4,7 @@ import conexao from "@/app/lib/conexao"
 export async function GET(request, {params}){
 
     const nome = (await params).nome
-    const query = `SELECT * FROM cortes WHERE nome LIKE '%${nome}%';`
+    const query = `SELECT * FROM cortes WHERE nome LIKE '%${nome}%' AND ativo = 1;`
     const[results] = await conexao.execute(query)
 
     return new Response(

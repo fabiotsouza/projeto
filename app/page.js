@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import './Tela_Inicial.css'; // Importando o CSS
 import axios from 'axios';
 import { Router } from 'next/router';
-import Menu from "./components/Menu.js"
 import host from './lib/host';
 import Menu_cliente from './components/Menu_cliente';
 
