@@ -16,9 +16,6 @@ function Inicio() {
 
         e.preventDefault();
 
-        let emailLocal = email
-        let senhaLocal = senha
-
         const obj = {
             nome: nome,
             email: email,
