@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
 body {
     background-color: #494850;
+    font-family: "Rubik", sans-serif;
+
 }
 
 .title {
@@ -119,6 +124,7 @@ body {
     font-size: 25px;
     background-color: #494850;
     padding: 20px;
+    margin: 10px;
 
 }
 
