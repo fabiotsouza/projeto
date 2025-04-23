@@ -57,7 +57,6 @@ function HomeBarbeiro() {
 
                         pageBehavior="single"
                         color="primary" // Added color prop to change selected cell color
-
                         classNames={{
                             base: 'custom-calendar',
                             cell: 'custom-cell',
@@ -95,7 +94,7 @@ function HomeBarbeiro() {
                                     selectDay == "vazio" &&
 
                                         <li className="scheduledItem">
-                                            <h3>Sem agendamentos para esse dia</h3>
+                                            <h3>Sem agendamentos para esse dia...</h3>
                                         </li>
 
                                 }
@@ -109,15 +108,11 @@ function HomeBarbeiro() {
 
                                 }
 
-
-
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     );
 }

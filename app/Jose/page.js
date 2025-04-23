@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import "./projeto1.css";
 import host from "../lib/host.js";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function Pagina_jose() {
@@ -16,6 +17,8 @@ function Pagina_jose() {
   const [price, setPrice] = useState("")
 
   const [edit, setEdit] = useState(0)
+
+  const error = () => toast.error("Preencha o nome e preço...");
 
   async function searchCuts() {
     const response = await axios.get(host + "cortes")
@@ -43,7 +46,7 @@ function Pagina_jose() {
       price: price,
       image: image
     }
-    const response = await axios.put(host + "cortes/"+ edit, obj)
+    const response = await axios.put(host + "cortes/" + edit, obj)
     console.log(response)
     setEdit(0)
     searchCuts()
@@ -51,17 +54,17 @@ function Pagina_jose() {
     setPrice("")
     setImage("")
   }
-  function createEdit(corte){
+  function createEdit(corte) {
     setEdit(corte.id)
     setName(corte.nome)
     setPrice(corte.preco)
     setImage(corte.imagem)
   }
-  async function deleteCut(id){
+  async function deleteCut(id) {
     await axios.delete(host + "cortes/" + id)
     searchCuts()
   }
-  function cancel(){
+  function cancel() {
     setEdit(0)
     setName("")
     setPrice("")
@@ -71,11 +74,13 @@ function Pagina_jose() {
 
   function sendForm(e) {
     e.preventDefault()
+
     if (edit == 0) {
       insertCut()
-    }else{
+    } else {
       updateCut()
     }
+
   }
   useEffect(() => {
     searchCuts()
@@ -93,9 +98,9 @@ function Pagina_jose() {
 
           {
             edit == 0 ?
-            <h2>Adicionar novos cortes:</h2>
-            :
-            <h2>Edição:</h2>
+              <h2>Adicionar novos cortes:</h2>
+              :
+              <h2>Edição:</h2>
 
           }
 
@@ -107,11 +112,11 @@ function Pagina_jose() {
               <p>
                 Nome:
               </p>
-              <input onChange={(e) => setName(e.target.value)} value={name} />
+              <input required onChange={(e) => setName(e.target.value)} value={name} />
               <p>
                 Preço:
               </p>
-              <input onChange={(e) => setPrice(e.target.value)} value={price} />
+              <input required onChange={(e) => setPrice(e.target.value)} value={price} />
               <p>
                 Imagem:
               </p>
@@ -119,20 +124,20 @@ function Pagina_jose() {
               <br />
               {
                 edit == 0 ?
-                <button >Adicionar corte</button>
-                :
-                <button>Editar</button>
+                  <button >Adicionar corte</button>
+                  :
+                  <button>Editar</button>
 
               }
-
+              <ToastContainer />
             </form>
-            
-          {
-            edit != 0 &&
 
-            <button onClick={() => cancel()}>Cancelar</button>
+            {
+              edit != 0 &&
 
-          }
+              <button onClick={() => cancel()}>Cancelar</button>
+
+            }
           </div>
         </div>
         <div className="tabela">
