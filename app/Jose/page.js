@@ -18,7 +18,11 @@ function Pagina_jose() {
 
   const [edit, setEdit] = useState(0)
 
+  let localName = name
+  let localPrice = price
+
   const error = () => toast.error("Preencha o nome e preço...");
+
 
   async function searchCuts() {
     const response = await axios.get(host + "cortes")
@@ -27,10 +31,17 @@ function Pagina_jose() {
 
   }
   async function insertCut() {
+    let localName = name
+    let localPrice = price
     const obj = {
       name: name,
       price: price,
       image: image
+    }
+
+    if(localName == "" || localPrice == ""){
+      error()
+      return
     }
     const response = await axios.post(host + "cortes", obj)
     console.log(response)
@@ -41,10 +52,19 @@ function Pagina_jose() {
   }
 
   async function updateCut() {
+    let localName = name
+    let localPrice = price
     const obj = {
       name: name,
       price: price,
       image: image
+
+    }
+    console.log(obj)
+
+    if(localName == "" || localPrice == ""){
+      error()
+      return
     }
     const response = await axios.put(host + "cortes/" + edit, obj)
     console.log(response)
@@ -112,11 +132,11 @@ function Pagina_jose() {
               <p>
                 Nome:
               </p>
-              <input required onChange={(e) => setName(e.target.value)} value={name} />
+              <input  onChange={(e) => setName(e.target.value)} value={name} />
               <p>
                 Preço:
               </p>
-              <input required onChange={(e) => setPrice(e.target.value)} value={price} />
+              <input  onChange={(e) => setPrice(e.target.value)} value={price} />
               <p>
                 Imagem:
               </p>
