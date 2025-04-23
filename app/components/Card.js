@@ -8,6 +8,8 @@ function Card(attr) {
        <div className="card">
             <h2>{attr.nome}</h2>
             <p>R$: {attr.preco}</p>
+            <p>{new Date(attr.dia).toLocaleDateString('pt-BR')}</p>
+            <p>{attr.horario}</p>
        </div>
        
     );

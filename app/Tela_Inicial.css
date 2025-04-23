@@ -154,3 +154,7 @@ footer li {
 .textoBranco{
     color: #f0f8ff;
 }
+
+.erro{
+    border: 1px, solid red;
+}

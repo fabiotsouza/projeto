@@ -34,10 +34,11 @@ function Home_cliente() {
 
     useEffect(()=> {
 
-        const usuarioLocal = localStorage.getItem("usuario")
+        const usuarioLocal = JSON.parse(localStorage.getItem("usuario"))
+        if(usuarioLocal.id){
+            buscaHistorico(usuarioLocal.id)
+        }
 
-        buscaTodos()
-        buscaHistorico(JSON.parse(usuarioLocal).id)
         buscaPopulares()
     }, [])
 
@@ -46,52 +47,51 @@ function Home_cliente() {
         <div>
             <Menu_cliente/>
             <br/><br/><br/><br/>
-            
-            <div className='icones'>
-                <div>
-                    <button onClick={()=> window.location.href ="./"}><FontAwesomeIcon icon={faUser}/></button>
-                    <p>Menu</p>
-                </div>
-                <div>
-                    <button onClick={()=> window.location.href ="./agendamento"}><FontAwesomeIcon icon={faScissors}/></button>
-                    <p>Cortes</p>
-                </div>
-                <div>
-                    <button onClick={()=> window.location.href ="./agendamento"}><FontAwesomeIcon icon={faCalendarDays}/></button>
-                    <p>Agendamento</p>
+            <div className='fundoIcones'>
+                <div className='icones'>
+                    <div>
+                        <button onClick={()=> window.location.href ="./"}><FontAwesomeIcon icon={faUser}/></button>
+                        <p>Menu</p>
+                    </div>
+                    <div>
+                        <button onClick={()=> window.location.href ="./agendamento"}><FontAwesomeIcon icon={faScissors}/></button>
+                        <p>Cortes</p>
+                    </div>
+                    <div>
+                        <button onClick={()=> window.location.href ="./agendamento"}><FontAwesomeIcon icon={faCalendarDays}/></button>
+                        <p>Agendamento</p>
+                    </div>
                 </div>
             </div>
-            
             <br/><br/><br/>
 
             <hr/>
             <div className='feed'>
                 <p>Histórico</p>
                 <div>
+                    <div className='cardPosition'>
                     {
                         historico.map(i=>
-                            <div>
-                                <Card nome={i.nome} preco={i.preco} id={i.id}/>                          
-                            </div>
-                        )
-                    }
+                                <Card nome={i.nome} preco={i.preco} dia={i.dia} horario={i.horario} id={i.id}/> 
+                            )
+                        }
+                        </div>
                 </div>
             </div>
 
             <div className='feed'>
                 <p>Populares</p>
-                <div>
+                <div className='cardPosition'>
                     {
-                        populares.map(i=>
-                            <div>
-                                <Card nome={i.nome} preco={i.preco} id={i.id}/>
-                            </div>
+                        populares.map(i=>                           
+                                 <Card nome={i.nome} preco={i.preco} id={i.id}/>                        
                         )
                     }
                 </div>
             </div>
 
         </div>
+
 
     );
 }
