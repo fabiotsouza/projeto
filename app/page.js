@@ -28,6 +28,9 @@ function Inicio() {
             senha: senha
         }
 
+        let emailLocal = nome
+        emailLocal = nome.toLowerCase()
+
         const response = await axios.post(host+"login/autenticar", obj)
 
         if (response.data.length == 0){
@@ -35,11 +38,18 @@ function Inicio() {
             return
         }
         
+        if(email != "ze@adm.com" && senha != "Zeadm"){
+            delete response.data[0].senha
+            const usuario = JSON.stringify(response.data[0])
+            localStorage.setItem("usuario", usuario)
+            window.location.href = '/home_cliente'
+        }else{
+            delete response.data[0].senha
+            const usuario = JSON.stringify(response.data[0])
+            localStorage.setItem("usuario", usuario)
+            window.location.href = '/home_barbeiro' 
+        }
 
-        delete response.data[0].senha
-        const usuario = JSON.stringify(response.data[0])
-        localStorage.setItem("usuario", usuario)
-        window.location.href = '/home_cliente'
 
     }
 
