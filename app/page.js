@@ -16,6 +16,9 @@ function Inicio() {
 
         e.preventDefault();
 
+        let emailLocal = email
+        let senhaLocal = senha
+
         const obj = {
             nome: nome,
             email: email,
@@ -25,12 +28,13 @@ function Inicio() {
         const response = await axios.post(host+"login/autenticar", obj)
 
         if (response.data.length == 0){
-            alert("Email, ou senha inválidos")
+            alert("Email, ou senha inválidos...")
             return
         }
         
-        
-        const usuario = JSON.stringify(obj)
+
+        delete response.data[0].senha
+        const usuario = JSON.stringify(response.data[0])
         localStorage.setItem("usuario", usuario)
         window.location.href = '/home_cliente'
 
@@ -39,6 +43,10 @@ function Inicio() {
     async function cadastro(e){
 
         e.preventDefault();
+
+        let nomeLocal = nome
+        let emailLocal = email
+        let senhaLocal = senha
 
         const obj = {
             nome: nome,
@@ -49,21 +57,37 @@ function Inicio() {
         console.log(obj)
 
         const response = await axios.post(host+"cadastro", obj)
+
+
+
+        
+        if(nomeLocal.length <= 3){
+            alert("O nome é muito curto...")
+            return
+        }
+        
+        if(emailLocal.includes(".") == false || emailLocal.includes("@") == false){
+            alert("Email inválido...")
+            return
+        }
+        
+        if(senhaLocal.length < 8){
+            alert("Senha muito curta...")
+            return
+        }
+        
         if(response.status == 200){
             alteraNome("")
             alteraEmail("")
             alteraSenha("")
             window.location.href= "/"
-        }else if(response.status == 401){
-            alteraNome("")
-            alteraEmail("")
-            alteraSenha("")
         }
     }
 
     useEffect(()=> {
-
-    }, [cadastro])
+        
+        
+    }, [])
 
     return (
         <div>
@@ -83,9 +107,9 @@ function Inicio() {
                 <h3>Login</h3>
                 <form onSubmit={(e)=> login(e)}>
                     <label htmlFor="email">E-mail:</label>
-                    <input type="email" id="email" name="email" onChange={(e)=> alteraEmail(e.target.value)} required />
+                    <input type="email" id="email_login" name="email" onChange={(e)=> alteraEmail(e.target.value)} required />
                     <label htmlFor="password">Senha:</label>
-                    <input type="password" id="password" name="password" onChange={(e)=> alteraSenha(e.target.value)} required />
+                    <input type="password" id="password_login" name="password" onChange={(e)=> alteraSenha(e.target.value)} required />
                     <button type="submit">Entrar</button>
                 </form>
             </section>
@@ -104,7 +128,7 @@ function Inicio() {
             </div>
 
             <div id="entrar" className='alinhaTexto'>
-                <a href="./home_cliente" className="btn">Navegar sem Logar</a>
+                <a href="./agendamento" className="btn" onClick={()=> localStorage.removeItem("usuario")}>Navegar sem Logar</a>
             </div>
 
             <footer>
