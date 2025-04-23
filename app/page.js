@@ -5,12 +5,18 @@ import axios from 'axios';
 import { Router } from 'next/router';
 import host from './lib/host';
 import Menu_cliente from './components/Menu_cliente';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Inicio() {
 
     const [nome, alteraNome] = useState([])
     const [email, alteraEmail] = useState([])
     const [senha, alteraSenha] = useState([])
+
+    const erroLogin = () => toast.error("Email, ou senha inválido...")
+    const erroNome = () => toast.error("O nome é muito curto")
+    const erroEmail = () => toast.error("O email deve conter ' @ ' e ' . '")
+    const erroSenha = () => toast.error("a senha é muito curta")
 
     async function login(e){
 
@@ -25,7 +31,7 @@ function Inicio() {
         const response = await axios.post(host+"login/autenticar", obj)
 
         if (response.data.length == 0){
-            alert("Email, ou senha inválidos...")
+            erroLogin()
             return
         }
         
@@ -59,17 +65,17 @@ function Inicio() {
 
         
         if(nomeLocal.length <= 3){
-            alert("O nome é muito curto...")
+            erroNome()
             return
         }
         
         if(emailLocal.includes(".") == false || emailLocal.includes("@") == false){
-            alert("Email inválido...")
+            erroEmail()
             return
         }
         
         if(senhaLocal.length < 8){
-            alert("Senha muito curta...")
+            erroSenha()
             return
         }
         
@@ -135,6 +141,7 @@ function Inicio() {
                 <p>Endereço: Rua do Seu Sonho, 123 - Bairro dos Sonhos, Cidade dos Sonhos</p>
                 <p>Horário de Funcionamento: Segunda a Sexta, 8h às 18h; Sábado, 9h às 13h</p>
             </footer>
+            <ToastContainer/>
         </div>
     );
 }
