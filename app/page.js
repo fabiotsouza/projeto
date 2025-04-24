@@ -28,9 +28,6 @@ function Inicio() {
             senha: senha
         }
 
-        let emailLocal = nome
-        emailLocal = nome.toLowerCase()
-
         const response = await axios.post(host+"login/autenticar", obj)
 
         if (response.data.length == 0){
@@ -84,7 +81,7 @@ function Inicio() {
             return
         }
         
-        if(senhaLocal.length < 8){
+        if(senhaLocal.length < 5){
             erroSenha()
             return
         }
