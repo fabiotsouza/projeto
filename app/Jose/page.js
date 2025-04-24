@@ -18,10 +18,9 @@ function Pagina_jose() {
 
   const [edit, setEdit] = useState(0)
 
-  let localName = name
-  let localPrice = price
-
   const error = () => toast.error("Preencha o nome e preço...");
+  const errorPrice = () => toast.error("O preço deve conter apenas números...");
+
 
 
   async function searchCuts() {
@@ -35,13 +34,17 @@ function Pagina_jose() {
     let localPrice = price
     const obj = {
       name: name,
-      price: price,
+      price: parseFloat(price),
       image: image
     }
 
-    if(localName == "" || localPrice == ""){
+    if (localName == "" || localPrice == "") {
       error()
       return
+    }
+    if (!isValidPrice(localPrice)) {
+      errorPrice();
+      return;
     }
     const response = await axios.post(host + "cortes", obj)
     console.log(response)
@@ -56,15 +59,19 @@ function Pagina_jose() {
     let localPrice = price
     const obj = {
       name: name,
-      price: price,
+      price: parseFloat(price),
       image: image
 
     }
     console.log(obj)
 
-    if(localName == "" || localPrice == ""){
+    if (localName == "" || localPrice == "") {
       error()
       return
+    }
+    if (!isValidPrice(localPrice)) {
+      errorPrice();
+      return;
     }
     const response = await axios.put(host + "cortes/" + edit, obj)
     console.log(response)
@@ -80,6 +87,11 @@ function Pagina_jose() {
     setPrice(corte.preco)
     setImage(corte.imagem)
   }
+
+  function isValidPrice(value) {
+    return /^\d*\.?\d+$/.test(value); // aceita número com ponto decimal
+  }
+
   async function deleteCut(id) {
     await axios.delete(host + "cortes/" + id)
     searchCuts()
@@ -132,15 +144,15 @@ function Pagina_jose() {
               <p>
                 Nome:
               </p>
-              <input  onChange={(e) => setName(e.target.value)} value={name} />
+              <input placeholder="Adicione um nome..." onChange={(e) => setName(e.target.value)} value={name} />
               <p>
                 Preço:
               </p>
-              <input  onChange={(e) => setPrice(e.target.value)} value={price} />
+              <input placeholder="Apenas números..." onChange={(e) => setPrice(e.target.value)} value={price} />
               <p>
                 Imagem:
               </p>
-              <input onChange={(e) => setImage(e.target.value)} value={image} />
+              <input placeholder="Adicione uma URL..." onChange={(e) => setImage(e.target.value)} value={image} />
               <br />
               {
                 edit == 0 ?
