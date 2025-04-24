@@ -84,11 +84,7 @@ input[type="password"] {
     box-sizing: border-box;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #191D32;
-    color: #f0f8ff;
-    border: none;
+button {   
     cursor: pointer;
 }
 

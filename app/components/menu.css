@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    
 }
 .menuSup button {
     width: 50px;
@@ -14,6 +14,15 @@
     background-color: transparent;
     color: aliceblue;
     cursor: pointer;
+}
+
+.menuSup a{
+    cursor: pointer;
+}
+
+.dropdownItem :hover{
+    background-color: grey;
+    border-radius: 10px;
 }
 
 .dropdownMenu{
@@ -27,13 +36,9 @@
     color: aliceblue;
     padding: 5px;
     font-size: 20px;
-
+    transition: background-color 0.3 ease;
 }
 ul{
     list-style-type: none;
     
-}
-.dropdownMenu ul  li:hover{
-    background-color: #494850;
-    cursor: pointer;
 }

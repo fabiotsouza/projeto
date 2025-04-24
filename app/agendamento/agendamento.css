@@ -95,6 +95,7 @@ input{
 .pesquisa{
     padding: 10px;
     border-radius: 30px;
+    margin-left: 5px;
 }
 
 .textoBranco{
@@ -120,8 +121,6 @@ button{
     color: aliceblue;
     border-radius: 50px;
     padding: 20px;
-
-
 }
 
 
@@ -175,4 +174,10 @@ button{
     flex-direction: row;
     background-color: aliceblue;
     border-radius: 50px;
+}
+
+.limpar{
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 5px;
 }
