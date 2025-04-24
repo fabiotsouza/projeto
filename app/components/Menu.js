@@ -22,8 +22,8 @@ function Menu() {
                     
                 <div className="dropdownMenu">
                     <ul>
-                        <DropdownItem  icon={faHouse} text={" Home"} onClick={()=> redirect("./")}/>
-                        <DropdownItem icon={faScissors} text={" Cortes"} onClick={()=> redirect("../Jose")}/>
+                        <DropdownItem  icon={faHouse} text={" Home"} onClick={()=> window.location.href("./")}/>
+                        <DropdownItem icon={faScissors} text={" Cortes"} onClick={()=> window.location.href("../Jose")}/>
                         <DropdownItem icon={faFile} text={" Relatório"}/>
 
                     </ul>
