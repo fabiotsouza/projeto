@@ -116,6 +116,7 @@ function Agendamento() {
                         <p className="textoBranco">Agende seu horário</p>
                         <Calendar aria-label="Date (International Calendar)"
                             defaultValue={today(getLocalTimeZone())}
+                            minValue={today(getLocalTimeZone())}
                             onChange={searchDay}
 
                             pageBehavior="single"

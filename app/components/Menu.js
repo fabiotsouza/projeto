@@ -51,7 +51,7 @@ function Menu() {
                 <br/>
                 <div>
                     <button  onClick={()=> {deslogar(), window.location.href = "./"}}><FontAwesomeIcon icon={faDoorClosed}/></button>
-                    <a>Deslogar</a>
+                    <a onClick={()=> window.location.href= "./"}>Deslogar</a>
                 </div>
             </li>
         )
