@@ -39,7 +39,6 @@ function Inicio() {
             delete response.data[0].senha
             const usuario = JSON.stringify(response.data[0])
             localStorage.setItem("usuario", usuario)
-            Menu_cliente(logado == 1)
             window.location.href = '/home_cliente'
         }else{
             delete response.data[0].senha

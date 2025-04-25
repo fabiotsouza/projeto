@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./Menu_cliente.css"
 
 function Menu_cliente() {
@@ -18,19 +18,23 @@ function Menu_cliente() {
         return
     }
 
+    useEffect(()=>{
+        alteraLogado(JSON.parse(localStorage.getItem('usuario')))
+    },[])
+
     return ( 
         <div>
             { 
-                logado == 1 ?
+                logado == null ?
 
+                    <div className="menuSup">
+                        <img src="https://placehold.co/100x40"/>
+                    </div>
+                :
                     <div className="menuSup">
                         <button className="voltar" onClick={()=> {voltar(), window.location.href = "/home_cliente"}}>Voltar</button>
                         <img src="https://placehold.co/100x40" />
                         <button className="deslogar" onClick={()=> {deslogar(), window.location.href = "./"}}>Deslogar</button>
-                    </div>
-                :
-                    <div className="menuSup">
-                        <img src="https://placehold.co/100x40"/>
                     </div>
             }
         </div>
