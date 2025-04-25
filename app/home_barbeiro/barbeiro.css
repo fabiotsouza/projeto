@@ -123,8 +123,9 @@ body {
     text-align: center;
     font-size: 25px;
     background-color: #494850;
-    padding: 20px;
+    padding: 15px 10px;
     margin: 10px;
+
 
 }
 
@@ -149,6 +150,7 @@ body {
 
 .c-c{
     cursor: pointer; 
+    padding: 10px;
 
 }
 

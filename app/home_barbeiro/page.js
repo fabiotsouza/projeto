@@ -14,6 +14,8 @@ function HomeBarbeiro() {
 
     //const [appointments, setAppointments] = useState([])
     const [selectDay, setSelectDay] = useState([])
+    const getButtonClass = (isActive) => isActive ? 'custom-button active' : 'custom-button';
+
 
 
     async function searchAll() {
@@ -66,6 +68,7 @@ function HomeBarbeiro() {
                             prevButton: 'custom-button',
                             headerWrapper: 'custom-headerW',
                             title: 'custom-title'
+
 
                         }}
                     />
