@@ -120,7 +120,7 @@ function Inicio() {
                     <input type="email" id="email_login" name="email" onChange={(e)=> alteraEmail(e.target.value)} required />
                     <label htmlFor="password">Senha:</label>
                     <input type="password" id="password_login" name="password" onChange={(e)=> alteraSenha(e.target.value)} required />
-                    <button type="submit">Entrar</button>
+                    <button className='btn' type="submit">Entrar</button>
                 </form>
             </section>
 
@@ -133,7 +133,7 @@ function Inicio() {
                     <input type="email" id="cadastro-email"  onChange={(e)=> alteraEmail(e.target.value)} required />
                     <label htmlFor="cadastro-password">Senha:</label>
                     <input type="password" id="cadastro-password"  onChange={(e)=> alteraSenha(e.target.value)} required />
-                    <button type="submit">Cadastrar</button>
+                    <button className='btn' type="submit">Cadastrar</button>
                 </form>
             </div>
 

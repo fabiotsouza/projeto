@@ -90,6 +90,7 @@ function Agendamento() {
                 <div className="centralizar">
 
                     <form onSubmit={(e) => enviaPesquisa(e)}>
+                        <button className="limpar" onClick={()=> alteraPesquisa("")  }>Limpar</button>
                         <input type="search" placeholder="Pesquisar" onChange={(e) => alteraPesquisa(e.target.value)} />
                         <button className="pesquisa" onClick={() => buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                     </form>
