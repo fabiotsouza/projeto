@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import "../agendamento.css"
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function Cortes(attr) {
 
@@ -34,6 +34,7 @@ function Cortes(attr) {
                     <button className="agendar fundoSalvar" onClick={()=> agendar() }>Agendar</button>                   
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 }
