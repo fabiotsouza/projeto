@@ -10,7 +10,7 @@ function Cortes(attr) {
 
     function agendar(){
         
-        if(localStorage.key == null || localStorage.key == ""){
+        if(localStorage.length == 0){
             erroAgendar()
             return
         }
