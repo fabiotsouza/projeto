@@ -9,7 +9,7 @@ function Menu_cliente() {
     }
 
     function voltar(){
-        if(localStorage.length == null){
+        if(localStorage.length == null || localStorage.length == ""){
             window.location.href = "./"
         }
         return
