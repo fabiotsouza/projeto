@@ -2,11 +2,18 @@
 
 import { useState } from "react";
 import "../agendamento.css"
+import { toast } from "react-toastify";
 
 function Cortes(attr) {
 
+    const erroAgendar = () => toast.error("Você deve estar logado para agendar um corte...")
 
     function agendar(){
+        
+        if(localStorage.key == null || localStorage.key == ""){
+            erroAgendar()
+            return
+        }
         attr.alteraVerHorario(true)
         attr.alteraCorteSelecionado(attr.id)
     }
