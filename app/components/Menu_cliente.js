@@ -1,11 +1,14 @@
+import { useState } from "react"
 import "./Menu_cliente.css"
 
 function Menu_cliente() {
 
+    const [logado, alteraLogado] = useState(0)
+    
     function deslogar(){
 
         localStorage.removeItem("usuario")
-
+        alteraLogado(0)
     }
 
     function voltar(){
@@ -16,13 +19,21 @@ function Menu_cliente() {
     }
 
     return ( 
+        <div>
+            { 
+                logado == 1 ?
 
-        <div className="menuSup">
-            <button className="voltar" onClick={()=> {voltar(), window.location.href = "/home_cliente"}}>Voltar</button>
-            <img src="https://placehold.co/100x40" />
-            <button className="deslogar" onClick={()=> {deslogar(), window.location.href = "./"}}>Deslogar</button>
+                    <div className="menuSup">
+                        <button className="voltar" onClick={()=> {voltar(), window.location.href = "/home_cliente"}}>Voltar</button>
+                        <img src="https://placehold.co/100x40" />
+                        <button className="deslogar" onClick={()=> {deslogar(), window.location.href = "./"}}>Deslogar</button>
+                    </div>
+                :
+                    <div className="menuSup">
+                        <img src="https://placehold.co/100x40"/>
+                    </div>
+            }
         </div>
-
     );
 }
 
