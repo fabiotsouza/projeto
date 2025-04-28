@@ -16,13 +16,14 @@ import host from "../lib/host";
 
 function Agendamento() {
 
+    const [usuario, alteraUsuario] = useState({})
+
     const [verHorario, alteraVerHorario] = useState(false);
     const [verCortes, setVerCortes] = useState(true)
 
     const [cortes, alteraCortes] = useState([])
     const [corteSelecionado, alteraCorteSelecionado] = useState([])
 
-    const [selectDay, setSelectDay] = useState([])
     const [dia, alteraDia] = useState([])
     const [hora, alteraHora] = useState([])
 
@@ -41,10 +42,12 @@ function Agendamento() {
     async function insereHorario(e) {
 
         e.preventDefault()
-
+        
         const obj = {
             dia: dia,
-            hora: hora
+            hora: hora,
+            id_corte: corteSelecionado,
+            id_usuario: usuario.id
         }
 
         const response = await axios.post(host + "agendamento", obj)
@@ -55,33 +58,23 @@ function Agendamento() {
 
     }
 
-
-    function enviaPesquisa(e) {
-
-        e.preventDefault()
-
-        if (pesquisa == null  && pesquisa !== ("")) {
-            <p>Corte não encontrado</p>
-        }
-    }
-
-    async function searchDay(dia) {
+    async function putDay(dia){
         const data = dia.year + "-" + dia.month + "-" + dia.day
-        console.log(data)
+        alteraDia(data)
         
-        const response = await axios.get(host + "agendamentos/" + data)
-        console.log(response)
-
-        if( response.data == 0){
-            console.log("Nao tem nada nesse dia")
-            setSelectDay("vazio")
-        }else{
-            setSelectDay(response.data)
-        }
     }
 
     useEffect(() => {
+        
+        const  u = JSON.parse(localStorage.getItem("usuario"))
+        if(u.id == null){
+            alert("Vocr nao esta logado")
+            return;
+        }
+        alteraUsuario(u)
+
         buscaTodos()
+
     }, [pesquisa])
 
     return (
@@ -118,7 +111,7 @@ function Agendamento() {
                         <Calendar aria-label="Date (International Calendar)"
                             defaultValue={today(getLocalTimeZone())}
                             minValue={today(getLocalTimeZone())}
-                            onChange={searchDay}
+                            onChange={putDay}
 
                             pageBehavior="single"
                             color="primary" // Added color prop to change selected cell color

@@ -21,3 +21,32 @@ export async function GET() {
     )
 
 }
+
+export async function POST(request) {
+    
+    const body = request.body;
+
+    const existeAgendamento = buscaAgendamentoNaData(body.data);
+    console.log(existeAgendamento)
+    if(existeAgendamento == true){
+        return new Response(null)
+    }
+
+    const query = `
+    INSERT INTO agendamentos (dia, horario, id_corte, id_usuario) VALUES (?, ?, ?, ?)
+    `
+    const [results] = await conexao.execute(query, [body.dia, body.hora, body.id_corte, body.id_usuario])
+
+    return new Response(JSON.stringify(results.insertId))
+
+}
+
+async function buscaAgendamentoNaData(data){
+
+    const query = `
+    SELECT * FROM agendamentos WHERE data >= ? AND data <= ?
+    `
+    const [results] = await conexao.execute(query, [data, data])
+    return results
+
+}
