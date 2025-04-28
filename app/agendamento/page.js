@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from "../components/Menu_cliente";
 import host from "../lib/host";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -27,6 +28,10 @@ function Agendamento() {
     const [hora, alteraHora] = useState([])
 
     const [pesquisa, alteraPesquisa] = useState("")
+
+    const erroLogin = () => toast.error("Você não está logado")
+    const erroDia = () => toast.error("Selecione um dia primeiro")
+    const sucessoDia = () => toast.success("Horário agendado com sucesso!")
 
     async function buscaTodos() {
         const response = await axios.get(host + "cortes")
@@ -67,9 +72,10 @@ function Agendamento() {
 
     useEffect(() => {
         
-        const  u = JSON.parse(localStorage.getItem("usuario"))
-        if(u.id == null){
-            alert("Vocr nao esta logado")
+        const usuarioLocal = JSON.parse(localStorage.getItem("usuario"))
+        const id = usuarioLocal.id
+        if(id == null){
+            erroLogin()
             return;
         }
         alteraUsuario(u)
@@ -160,14 +166,14 @@ function Agendamento() {
                             })}
                         </select>
                         <br/>
-                        <button className="botaoSalvarAgendamento" >Salvar</button>
+                        <button className="botaoSalvarAgendamento">Salvar</button>
 
                     </form>
                 </div>
             }
 
 
-
+            <ToastContainer/>
         </div>
     );
 }
