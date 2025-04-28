@@ -17,6 +17,9 @@ function Home_cliente() {
     const[populares, alteraPopulares] = useState([])
     const[cortes, alteraCortes] = useState([])
 
+    const usuarioLocal = JSON.parse(localStorage.getItem("usuario"))
+    const nome = usuarioLocal.nome
+
     async function buscaTodos(){
         const response = await  axios.get(host+"cortes")
         alteraCortes(response.data)
@@ -46,13 +49,13 @@ function Home_cliente() {
 
         <div>
             <Menu_cliente/>
-            <br/><br/><br/><br/>
+            <br/><br/><br/>
+            <div className='title'>
+                <h1>Bem vindo {nome}</h1>
+                <h2>O que vai ser hoje?</h2>
+            </div>
             <div className='fundoIcones'>
                 <div className='icones'>
-                    <div>
-                        <button onClick={()=> window.location.href ="./"}><FontAwesomeIcon icon={faUser}/></button>
-                        <p>Menu</p>
-                    </div>
                     <div>
                         <button onClick={()=> window.location.href ="./agendamento"}><FontAwesomeIcon icon={faScissors}/></button>
                         <p>Cortes</p>

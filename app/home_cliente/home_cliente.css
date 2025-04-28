@@ -8,8 +8,8 @@ body{
     justify-content: center;
     justify-content: space-between;
     text-align: center;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 400px;
+    margin-right: 400px;
 }
 
 .icones button{
@@ -23,8 +23,8 @@ body{
     background-color: #2c2c34;
     padding: 30px;
     border-radius: 50px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 hr{
@@ -53,3 +53,16 @@ button{
     display: flex;
 }
 
+.title {
+    margin: 20px 50px;
+}
+
+.title h1 {
+    font-size: 35px;
+    color: aliceblue;
+}
+
+.title h2 {
+    font-size: 25px;
+    color: silver;
+}

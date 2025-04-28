@@ -31,7 +31,7 @@ function Cortes(attr) {
                 </div>
                 <div>
                     <br/><br/>
-                    <button className="agendar fundoSalvar" onClick={()=> agendar() }>Agendar</button>                   
+                    <button className="agendar" onClick={()=> agendar() }>Agendar</button>                   
                 </div>
             </div>
             <ToastContainer/>
