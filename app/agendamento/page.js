@@ -13,7 +13,6 @@ import host from "../lib/host";
 
 
 
-
 function Agendamento() {
 
     const [usuario, alteraUsuario] = useState({})
@@ -43,14 +42,15 @@ function Agendamento() {
 
         e.preventDefault()
         
+        
         const obj = {
             dia: dia,
-            hora: hora,
+            hora: hora+":00",
             id_corte: corteSelecionado,
             id_usuario: usuario.id
         }
-
-        const response = await axios.post(host + "agendamento", obj)
+        
+        const response = await axios.post(host + "agendamentos", obj)
 
 
         alteraDia("")
@@ -59,6 +59,7 @@ function Agendamento() {
     }
 
     async function putDay(dia){
+
         const data = dia.year + "-" + dia.month + "-" + dia.day
         alteraDia(data)
         
@@ -113,9 +114,7 @@ function Agendamento() {
                             minValue={today(getLocalTimeZone())}
                             onChange={putDay}
 
-                            pageBehavior="single"
-                            color="primary" // Added color prop to change selected cell color
-
+                            
                             classNames={{
                                 base: 'custom-calendar',
                                 cell: 'custom-cell',
@@ -128,8 +127,41 @@ function Agendamento() {
 
                             }}
                         />
-                        <input type="time" required onChange={(e) => alteraHora(e.target.value)} />
-                        <button>Salvar</button>
+
+                        {/* <input type="time" required onChange={(e) => alteraHora(e.target.value)} step="600" /> */}
+                        <select className="campoHoras" onChange={(e) => alteraHora(e.target.value+":00")} required>
+                            <option value="">Selecione um horário</option>
+                            {Array.from({ length: 24 }, (_, i) => {
+                                const h = 9 + Math.floor(i / 2);  // Começa em 09:00
+                                const m = i % 2 === 0 ? 0 : 30;
+                                const horaFormatada = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+
+                                // Criar data do horário da opção
+                                const agora = new Date();
+                                const horarioOpcao = new Date();
+                                horarioOpcao.setHours(h, m, 0, 0);
+
+                                // Arredondar 'agora' para o próximo múltiplo de 30 minutos
+                                const arredondado = new Date();
+                                const minutos = agora.getMinutes();
+                                const arredondaPara = minutos < 30 ? 30 : 60;
+                                arredondado.setMinutes(0, 0, 0);
+                                arredondado.setHours(agora.getHours() + (minutos < 30 ? 0 : 1));
+                                arredondado.setMinutes(minutos < 30 ? 30 : 0);
+
+                                // Verifica se a opção é anterior ao horário arredondado
+                                const desabilitar = horarioOpcao < arredondado;
+
+                                return (
+                                <option key={horaFormatada} value={horaFormatada} disabled={desabilitar}>
+                                    {horaFormatada}
+                                </option>
+                                );
+                            })}
+                        </select>
+                        <br/>
+                        <button className="botaoSalvarAgendamento" >Salvar</button>
+
                     </form>
                 </div>
             }

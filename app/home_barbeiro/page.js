@@ -14,7 +14,7 @@ function HomeBarbeiro() {
 
     //const [appointments, setAppointments] = useState([])
     const [selectDay, setSelectDay] = useState([])
-    const getButtonClass = (isActive) => isActive ? 'custom-button active' : 'custom-button';
+
 
 
 

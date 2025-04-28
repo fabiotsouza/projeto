@@ -151,14 +151,7 @@ body {
 .c-c{
     cursor: pointer; 
     padding: 10px;
-
 }
-
-.aria-disabled{
-    background-color: white;
-}
-
-
 
 .custom-headerW{
     display: flex;

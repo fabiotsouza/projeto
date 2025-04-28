@@ -24,9 +24,9 @@ export async function GET() {
 
 export async function POST(request) {
     
-    const body = request.body;
+    const body = await request.json()
 
-    const existeAgendamento = buscaAgendamentoNaData(body.data);
+    const existeAgendamento = await buscaAgendamentoNaData(body.dia, body.hora);
     console.log(existeAgendamento)
     if(existeAgendamento == true){
         return new Response(null)
@@ -41,12 +41,12 @@ export async function POST(request) {
 
 }
 
-async function buscaAgendamentoNaData(data){
+async function buscaAgendamentoNaData(dia, hora){
 
     const query = `
-    SELECT * FROM agendamentos WHERE data >= ? AND data <= ?
+    SELECT * FROM agendamentos WHERE dia = ${dia} AND horario = '${hora}'
     `
-    const [results] = await conexao.execute(query, [data, data])
+    const [results] = await conexao.execute(query)
     return results
 
 }
