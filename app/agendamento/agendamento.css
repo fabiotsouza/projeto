@@ -212,3 +212,7 @@ button{
     cursor: not-allowed;
     color: #2c2c34
 }
+
+[data-selected]{
+    color: aqua;
+}

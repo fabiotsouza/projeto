@@ -162,3 +162,11 @@ body {
     background-color: aliceblue;
     border-radius: 50px;
 }
+[data-disabled] {
+    cursor: not-allowed;
+    color: #2c2c34
+}
+
+[data-selected]{
+    color: aqua;
+}
