@@ -75,10 +75,10 @@ function Home_cliente() {
                     <div className='cardPosition'>
                     {
                         historico.map(i=>
-                                <Card nome={i.nome} preco={i.preco} dia={i.dia} horario={i.horario} id={i.id}/> 
+                                <Card nome={i.nome} preco={i.preco} dia={i.dia} horario={i.horario}/> 
                             )
                         }
-                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -10,8 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from "../components/Menu_cliente";
 import host from "../lib/host";
-import { ToastContainer, toast } from "react-toastify";
-
+import Swal from 'sweetalert2'
 
 
 function Agendamento() {
@@ -29,9 +28,6 @@ function Agendamento() {
 
     const [pesquisa, alteraPesquisa] = useState("")
 
-    const erroLogin = () => toast.error("Você não está logado")
-    const erroDia = () => toast.error("Selecione um dia primeiro")
-    const sucessoDia = () => toast.success("Horário agendado com sucesso!")
 
     async function buscaTodos() {
         const response = await axios.get(host + "cortes")
@@ -50,13 +46,18 @@ function Agendamento() {
         
         const obj = {
             dia: dia,
-            hora: hora+":00",
+            hora: hora,
             id_corte: corteSelecionado,
             id_usuario: usuario.id
         }
-        
+        console.log(obj)
         const response = await axios.post(host + "agendamentos", obj)
 
+        Swal.fire({
+            title: "Parabéns!",
+            text: "Corte agendado com sucesso",
+            icon: "success"
+        });
 
         alteraDia("")
         alteraHora("")
@@ -64,7 +65,7 @@ function Agendamento() {
     }
 
     async function putDay(dia){
-
+        console.log(dia)
         const data = dia.year + "-" + dia.month + "-" + dia.day
         alteraDia(data)
         
@@ -74,11 +75,12 @@ function Agendamento() {
         
         const usuarioLocal = JSON.parse(localStorage.getItem("usuario"))
         const id = usuarioLocal.id
+        console.log(id)
         if(id == null){
-            erroLogin()
+        
             return;
         }
-        alteraUsuario(u)
+        alteraUsuario(usuarioLocal)
 
         buscaTodos()
 
@@ -129,8 +131,8 @@ function Agendamento() {
                                 nextButton: 'custom-button',
                                 prevButton: 'custom-button',
                                 headerWrapper: 'custom-headerW',
-                                title: 'custom-title'
-
+                                title: 'custom-title',
+                                
                             }}
                         />
 
@@ -172,8 +174,7 @@ function Agendamento() {
                 </div>
             }
 
-
-            <ToastContainer/>
+            
         </div>
     );
 }

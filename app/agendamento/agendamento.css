@@ -167,12 +167,6 @@ button{
     padding: 10px;
 }
 
-.aria-disabled{
-    background-color: white;
-}
-
-
-
 .custom-headerW{
     display: flex;
     justify-content: space-between;
@@ -212,4 +206,9 @@ button{
     filter: brightness(1.1);
     transition: 0.3s;
     transform: scale(1.05);
+}
+
+[data-disabled] {
+    cursor: not-allowed;
+    color: #2c2c34
 }
