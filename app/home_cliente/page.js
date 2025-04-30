@@ -3,7 +3,7 @@ import axios from 'axios';
 import './home_cliente.css'
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faCalendarDays, faScissors } from "@fortawesome/free-solid-svg-icons"
+import { faDoorOpen, faCalendarDays, faScissors } from "@fortawesome/free-solid-svg-icons"
 import Menu_cliente from '../components/Menu_cliente';
 import host from '../lib/host';
 import Card from '../components/Card';
@@ -55,10 +55,6 @@ function Home_cliente() {
             <div className='title'>
                 <h1>Bem vindo, {nome}</h1>
                 <h2>O que vai ser hoje?</h2>
-                <button className="btnSair" onClick={ ()=> {
-                    localStorage.removeItem("usuario");
-                    window.location.href="/"
-                } } >Sair</button>
             </div>
             <div className='fundoIcones'>
                 <div className='icones'>
@@ -67,8 +63,8 @@ function Home_cliente() {
                         <p>Cortes</p>
                     </div>
                     <div>
-                        <button onClick={()=> window.location.href ="./agendamento"}><FontAwesomeIcon icon={faCalendarDays}/></button>
-                        <p>Agendamento</p>
+                        <button onClick={()=> {window.location.href ="/", localStorage.removeItem("usuario")}}><FontAwesomeIcon icon={faDoorOpen}/></button>
+                        <p>Sair</p>
                     </div>
                 </div>
             </div>
