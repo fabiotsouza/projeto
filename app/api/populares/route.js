@@ -3,17 +3,10 @@ import conexao from "@/app/lib/conexao";
 export async function GET(){
 
     const query = `
-
-        SELECT cortes.nome, COUNT(agendamentos.id_corte) as total_realizados
-        FROM cortes JOIN agendamentos ON agendamentos.id_corte = cortes.id 
-        ORDER BY total_realizados DESC LIMIT 5;         
-    `
-
-    /*
-    SELECT c.nome AS cortes, COUNT(a.id) AS total_realizados
+        SELECT c.nome AS nome, c.imagem, COUNT(a.id) AS total_realizados
         FROM agendamentos a JOIN cortes c ON a.id_corte = c.id
-        GROUP BY c.nome ORDER BY total_realizados DESC LIMIT 5; 
-    */
+        GROUP BY c.nome ORDER BY total_realizados DESC LIMIT 5;    
+    `
 
     const [results] = await conexao.execute(query)
 

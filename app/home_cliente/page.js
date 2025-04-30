@@ -32,6 +32,7 @@ function Home_cliente() {
 
     async function buscaPopulares(){
         const response = await axios.get(host+"populares")
+        console.log(response)
         alteraPopulares(response.data)
     }
 
@@ -87,7 +88,7 @@ function Home_cliente() {
                 <div className='cardPosition'>
                     {
                         populares.map(i=>                           
-                                 <Card nome={i.nome} preco={i.preco} id={i.id}/>                        
+                                 <Card nome={i.nome} imagem={i.imagem} />                        
                         )
                     }
                 </div>
