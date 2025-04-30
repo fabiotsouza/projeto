@@ -55,7 +55,10 @@ function Home_cliente() {
             <div className='title'>
                 <h1>Bem vindo, {nome}</h1>
                 <h2>O que vai ser hoje?</h2>
-                <button className="btnSair">Sair</button>
+                <button className="btnSair" onClick={ ()=> {
+                    localStorage.removeItem("usuario");
+                    window.location.href="/"
+                } } >Sair</button>
             </div>
             <div className='fundoIcones'>
                 <div className='icones'>

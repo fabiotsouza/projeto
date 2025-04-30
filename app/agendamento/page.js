@@ -20,22 +20,35 @@ function Agendamento() {
     const [verHorario, alteraVerHorario] = useState(false);
     const [verCortes, setVerCortes] = useState(true)
 
+    const [cortesOriginal, alteraCortesOriginal] = useState([])
     const [cortes, alteraCortes] = useState([])
     const [corteSelecionado, alteraCorteSelecionado] = useState([])
 
     const [dia, alteraDia] = useState([])
     const [hora, alteraHora] = useState([])
 
-    const [pesquisa, alteraPesquisa] = useState("")
+    //const [pesquisa, alteraPesquisa] = useState("")
 
+    function pesquisar(e){
+        if(cortesOriginal.length == 0)
+            return
+        
+        let cortesEncontrados = []
+        let pesquisa = e
+        for(let i = 0; i < cortesOriginal.length; i++){
+            if( cortesOriginal[i].nome.toLowerCase().indexOf(pesquisa) != -1 )
+                cortesEncontrados.push(cortesOriginal[i])
+        }
+
+        console.log(cortesEncontrados)
+        alteraCortes(cortesEncontrados);
+
+
+    }
 
     async function buscaTodos() {
         const response = await axios.get(host + "cortes")
-        alteraCortes(response.data)
-    }
-
-    async function buscaPorNome(nome) {
-        const response = await axios.get(host + "cortes/pesquisa/" + nome)
+        alteraCortesOriginal(response.data)
         alteraCortes(response.data)
     }
 
@@ -78,7 +91,7 @@ function Agendamento() {
 
         buscaTodos()
 
-    }, [pesquisa])
+    }, [])
 
     return (
         <div>
@@ -86,11 +99,11 @@ function Agendamento() {
             {verCortes == true && verHorario == false ?
                 <div className="centralizar">
 
-                    <form onSubmit={(e) => enviaPesquisa(e)}>
-                        <button className="limpar" onClick={()=> alteraPesquisa("")  }>Limpar</button>
-                        <input type="search" placeholder="Pesquisar" onChange={(e) => alteraPesquisa(e.target.value)} />
-                        <button className="pesquisa" onClick={() => buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                    </form>
+                    
+                   
+                    <input type="search" placeholder="Pesquisar" onChange={(e) => pesquisar(e.target.value)} />
+                    {/* <button className="pesquisa" onClick={() => buscaPorNome(pesquisa)} ><FontAwesomeIcon icon={faMagnifyingGlass} /></button> */}
+                    
 
                     {
                         cortes.length == 0 ? <p>Corte não encontrado</p>
