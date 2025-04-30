@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Router } from 'next/router';
 import host from './lib/host';
 import Menu_cliente from './components/Menu_cliente';
-import { ToastContainer, toast } from 'react-toastify';
+import Swal from 'sweetalert2'
 
 function Inicio() {
 
@@ -99,56 +99,57 @@ function Inicio() {
         
     }, [])
 
-    return (
+    return (    
         <div>
             <Menu_cliente/>
-            <section id="hero">
-                <img
-                    className="grad"
-                    src="/imagens/barbeiro-home.jpg"
-                    alt="Hero"
-                />
+            
+            <div className='apresentacao'>
                 <h2>A MELHOR EXPERIÊNCIA NA BARBEARIA</h2>
-            </section>
+            </div>
 
             <br></br>
 
-            <section id="login" className='alinhaTexto'>
-                <h3>Login</h3>
-                <form onSubmit={(e)=> login(e)}>
-                    <label htmlFor="email">E-mail:</label>
-                    <input type="email" id="email_login" name="email" onChange={(e)=> alteraEmail(e.target.value)} required />
-                    <label htmlFor="password">Senha:</label>
-                    <input type="password" id="password_login" name="password" onChange={(e)=> alteraSenha(e.target.value)} required />
-                    <button className='btn' type="submit">Entrar</button>
-                </form>
-            </section>
+            <div className="formularios">
 
-            <div id="cadastro" className='alinhaTexto'>
-                <h3>Cadastro</h3>
-                <form onSubmit={(e)=> cadastro(e)} >
-                    <label htmlFor="cadastro-nome">Nome:</label>
-                    <input type="name" id="cadastro-name"  onChange={(e)=> alteraNome(e.target.value)} required/>
-                    <label htmlFor="cadastro-email">E-mail:</label>
-                    <input type="email" id="cadastro-email"  onChange={(e)=> alteraEmail(e.target.value)} required />
-                    <label htmlFor="cadastro-password">Senha:</label>
-                    <input type="password" id="cadastro-password"  onChange={(e)=> alteraSenha(e.target.value)} required />
-                    <button className='btn' type="submit">Cadastrar</button>
-                </form>
+                <section id="login" className='alinhaTexto'>
+                    <h3>Entrar</h3>
+                    <form onSubmit={(e)=> login(e)}>
+                        <label htmlFor="email">E-mail:</label>
+                        <input type="email" id="email_login" name="email" onChange={(e)=> alteraEmail(e.target.value)} required />
+                        <label htmlFor="password">Senha:</label>
+                        <input type="password" id="password_login" name="password" onChange={(e)=> alteraSenha(e.target.value)} required />
+                        <button className='btn'>Entrar</button>
+                    </form>
+                </section>
+
+                <div id="cadastro" className='alinhaTexto'>
+                    <h3>Cadastre-se</h3>
+                    <form onSubmit={(e)=> cadastro(e)} >
+                        <label htmlFor="cadastro-nome">Nome:</label>
+                        <input type="name" id="cadastro-name"  onChange={(e)=> alteraNome(e.target.value)} required/>
+                        <label htmlFor="cadastro-email">E-mail:</label>
+                        <input type="email" id="cadastro-email"  onChange={(e)=> alteraEmail(e.target.value)} required />
+                        <label htmlFor="cadastro-password">Senha:</label>
+                        <input type="password" id="cadastro-password"  onChange={(e)=> alteraSenha(e.target.value)} required />
+                        <button className='btn' type="submit">Cadastrar</button>
+                    </form>
+                </div>
+            
             </div>
 
             <div id="entrar" className='alinhaTexto'>
-                <a href="./agendamento" className="btn" onClick={()=> localStorage.removeItem("usuario")}>Navegar sem Logar</a>
+                <p>Conheça as opções de cortes e dias disponíveis</p>
+                <a href="./agendamento" className="botaoNavegar" onClick={()=> localStorage.removeItem("usuario")}>Navegar sem Logar</a>
             </div>
 
             <footer>
                 <h4>Contatos</h4>
-                <p>Telefone: (XX) XXXX-XXXX</p>
+                <p>Telefone: (16) 9 9173-3577</p>
                 <p>E-mail: contato@barbeariaseusonho.com</p>
                 <p>Endereço: Rua do Seu Sonho, 123 - Bairro dos Sonhos, Cidade dos Sonhos</p>
                 <p>Horário de Funcionamento: Segunda a Sexta, 8h às 18h; Sábado, 9h às 13h</p>
             </footer>
-            <ToastContainer/>
+            
         </div>
     );
 }

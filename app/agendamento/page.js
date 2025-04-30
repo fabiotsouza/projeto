@@ -74,12 +74,6 @@ function Agendamento() {
     useEffect(() => {
         
         const usuarioLocal = JSON.parse(localStorage.getItem("usuario"))
-        const id = usuarioLocal.id
-        console.log(id)
-        if(id == null){
-        
-            return;
-        }
         alteraUsuario(usuarioLocal)
 
         buscaTodos()
@@ -105,7 +99,7 @@ function Agendamento() {
                                 {
                                     cortes.map(i =>
                                         <div>
-                                            <Corte image={i.imagem} nome={i.nome} preco={i.preco} alteraVerHorario={alteraVerHorario} alteraCorteSelecionado={alteraCorteSelecionado} id={i.id} />
+                                            <Corte usuario={usuario} image={i.imagem} nome={i.nome} preco={i.preco} alteraVerHorario={alteraVerHorario} alteraCorteSelecionado={alteraCorteSelecionado} id={i.id} />
                                         </div>
                                     )
                                 }

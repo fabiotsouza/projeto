@@ -18,6 +18,13 @@
     margin-left: 50px;
 }
 
+.menuSup img{
+    cursor: pointer;
+    transition: 0.3s;
+}
+.menuSup img:hover{
+    transform: scale(1.1);
+}
 
 
 

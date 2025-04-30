@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import "../agendamento.css"
-import { toast, ToastContainer } from "react-toastify";
+import Swal from 'sweetalert2'
+
 
 function Cortes(attr) {
 
@@ -10,6 +11,23 @@ function Cortes(attr) {
 
     function agendar(){
         
+        if(attr.usuario == null){
+            console.log("nao ta logado")
+            const resposta = Swal.fire({
+                text: "Você precisa entrar com uma conta para agendar este corte!",
+                icon: "error",
+                showCancelButton: true,
+                confirmButtonText: `Fechar`,
+                cancelButtonText: `Criar uma conta`,
+              }).then((results)=> {
+                if(results.isDismissed == true){
+                    window.location.href = "/"
+                }
+              })
+
+            console.log(resposta)
+        }
+
         if(localStorage.length == 0){
             erroAgendar()
             return
@@ -34,7 +52,6 @@ function Cortes(attr) {
                     <button className="agendar" onClick={()=> agendar() }>Agendar</button>                   
                 </div>
             </div>
-            <ToastContainer/>
         </div>
     );
 }

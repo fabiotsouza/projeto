@@ -44,6 +44,7 @@ function Home_cliente() {
         }
 
         buscaPopulares()
+
     }, [])
 
     return ( 
@@ -52,8 +53,9 @@ function Home_cliente() {
             <Menu_cliente/>
             <br/><br/><br/>
             <div className='title'>
-                <h1>Bem vindo {nome}</h1>
+                <h1>Bem vindo, {nome}</h1>
                 <h2>O que vai ser hoje?</h2>
+                <button className="btnSair">Sair</button>
             </div>
             <div className='fundoIcones'>
                 <div className='icones'>
