@@ -20,6 +20,10 @@
     cursor: pointer;
 }
 
+.menuSup img{
+    width: 70px;
+}
+
 .dropdownItem :hover{
     background-color: grey;
     border-radius: 10px;
