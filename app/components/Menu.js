@@ -32,7 +32,7 @@ function Menu() {
                 </div>
                 }
             </div>
-            <img src="https://placehold.co/100x40" />
+            <img src="/imagens/logo3.png"/>
             <div></div>
         </div>
     );
