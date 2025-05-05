@@ -5,6 +5,7 @@ body{
 
 .icones{
     display: flex;
+    gap: 50px;
     justify-content: center;
     justify-content: space-between;
     text-align: center;
